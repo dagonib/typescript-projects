@@ -17,3 +17,43 @@
 - [ ] Añadir animaciones con AuntoAnimate
 - [ ] Pasar a Reducer
 - [ ] Sincronizar con el backend
+
+2. CREAR Proyecto add-items-ts
+    - Crear proyecto con vite:
+        npm create vite@latest
+        nombre: add-items-ts
+        framework: React
+        variant: TypeScript + SWC (específica el compilador)
+    - Instalar dependencias en carpeta del proyecto:
+        npm install
+    - Iniciar modo desarrollo:
+        npm run dev
+    - Testear
+        1. Instalación:
+        npm install vitest happy-dom -D
+        En vite.config.tx: 
+            /// <reference types="vitest" />
+            export default defineConfig({
+                plugins: [react()],
+                test: {
+                    environment: 'happy-dom'
+                }
+            })
+        En package.json:
+            "scripts": {
+                "test": "vitest",
+            },
+        2. Primera prueba:
+            Carpeta en root: Test --> App.test.tsx
+                import { describe, test, expect } from 'vitest'
+
+                describe('<App />', () => {
+                    test('should work', () => {
+                        expect(1).toBe(2)
+                    })
+                })
+            Resultado: error.
+        3.Instalar React Testing Library:
+            npm install --save-dev @testing-library/react
+        4. Instalar user-event v13:
+            npm install --save-dev @testing-library/user-event 
