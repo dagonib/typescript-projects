@@ -8,17 +8,17 @@ import { Header } from './components/Header'
 const mockTodos = [
   {
     id: 1,
-    title: 'Ver el Twitch de midu',
+    title: 'Leer un capítulo de un libro',
     completed: true
   },
   {
     id: 2,
-    title: 'Aprender React con TypeScript',
+    title: 'Revisar y responder correos electrónicos',
     completed: false
   },
   {
     id: 3,
-    title: 'Sacar ticket de la miduFest',
+    title: 'Hacer una lista de compras',
     completed: false
   }
 ]
@@ -68,7 +68,7 @@ const App = (): JSX.Element => {
   const handleAddTodo = ({ title }: TodoTitle): void => {
     const newTodo = {
       title,
-      id: crypto.randomUUID(),
+      id: todos.length + 1,
       completed: false
     }
 
