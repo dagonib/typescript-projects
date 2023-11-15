@@ -13,15 +13,15 @@ export function CreateNewUser () {
         const form = event.target as HTMLFormElement
         const formData = new FormData(form)
 
-        const name = formData.get('name') as String
-        const email = formData.get('email') as String
-        const github = formData.get('github') as String
+        const name = formData.get('name') as string
+        const email = formData.get('email') as string
+        const github = formData.get('github') as string
 
         if (!name || !email || !github) {
             return setResult('ko')
         }
 
-        addUser({ name, email, github })
+        addUser({ name, email, github})
         setResult('ok')
         form.reset()
     }

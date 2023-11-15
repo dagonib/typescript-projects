@@ -1,5 +1,5 @@
 import { type Middleware, configureStore } from '@reduxjs/toolkit'
-import usersReducer, { rollbackUser } from './users/slice'
+import usersReducer, { rollbackUser, type UserWithId } from './users/slice'
 import { toast } from 'sonner'
 
 const persistanceLocalStorageMiddleware: Middleware = (store) => (next) => (action) => {
@@ -16,16 +16,16 @@ const syncWithDatabase: Middleware = store => next => action => {
      // Fase 2
     if (type === 'users/deleteUserById') {
         const userIdToRemove = payload
-        const userToRemove = previousState.users.find(user => user.id === userIdToRemove)
+        const userToRemove = previousState.users.find((user: UserWithId)=> user.id === userIdToRemove)
 
-        fetch(`https://jsonplaceholder.typicode.cdfom/users/${userIdToRemove}`, {
+        fetch(`https://jsonplaceholder.typicode.com/users/${userIdToRemove}`, {
             method: 'DELETE'
         })
             .then(res => {
                 if (res.ok) {
                     toast.success(`Usuario ${payload} eliminado correctamente`)
                 }
-                throw new Error('Error al eliminar el usuario')
+                // throw new Error('Error al eliminar el usuario')
             })
             .catch((err) => {
                 toast.error(`Error deleting user ${userIdToRemove}`)
@@ -35,7 +35,6 @@ const syncWithDatabase: Middleware = store => next => action => {
     }
 
     if (type === 'users/addNewUser') {
-        console.log(payload)
         fetch(`https://jsonplaceholder.typicode.com/users/`, {
             method: 'POST',
             body: JSON.stringify({
@@ -48,7 +47,6 @@ const syncWithDatabase: Middleware = store => next => action => {
         })
             .then(res => {
                 if (res.ok) {
-                    console.log(res.ok)
                     toast.success(`Usuario ${payload.name} creado correctamente`)
                 }
             })
