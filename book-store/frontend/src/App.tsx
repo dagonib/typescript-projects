@@ -1,17 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { sampleBooks } from './data.ts'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
       <header>Kimbombook</header>
 
       <main>
-
+        <ul>
+          {sampleBooks.map((book) => (
+            <li key={book.title}>
+              <img src={book.image} alt={book.title} className='book-image' />
+              <h2>{book.title}</h2>
+              <p>{book.description}</p>
+              <p>{book.category}</p>
+              <p>{book.language}</p>
+              <a href={book.link} target='_blank' rel='noreferrer'>Comprar</a>
+            </li>
+          ))}
+        </ul>
       </main>
 
       <footer>
