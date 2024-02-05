@@ -19,6 +19,7 @@ export const Books: React.FC<Props> = ({ books }) => {
             category={book.category}
             language={book.language}
             link={book.link}
+            available={book.available}
           />
         </li>
       ))}

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 import { Books } from './components/Books/Books'
+import { type FilterValue } from './types'
+import { BOOK_FILTERS } from './consts'
+import { Header } from './components/Header/Header'
 
 const mockBooks = [
   {
@@ -10,7 +13,8 @@ const mockBooks = [
     imageLink: 'https://m.media-amazon.com/images/I/816-B958itL._SY342_.jpg',
     category: ['Novela Histórica'],
     language: 'Castellano',
-    link: 'https://www.amazon.es/poca-vida-NARRATIVA-Hanya-Yanagihara/dp/8426403271?ref_=Oct_d_omwf_d_14177711031_0&pd_rd_w=KmDcW&content-id=amzn1.sym.e4354a4b-0830-4275-97ba-7906ebb9a899&pf_rd_p=e4354a4b-0830-4275-97ba-7906ebb9a899&pf_rd_r=948ZWC294VKMXTH6JFWV&pd_rd_wg=upnHN&pd_rd_r=61eef23b-289d-47bd-9ace-9691d3995815&pd_rd_i=8426403271'
+    link: 'https://www.amazon.es/poca-vida-NARRATIVA-Hanya-Yanagihara/dp/8426403271?ref_=Oct_d_omwf_d_14177711031_0&pd_rd_w=KmDcW&content-id=amzn1.sym.e4354a4b-0830-4275-97ba-7906ebb9a899&pf_rd_p=e4354a4b-0830-4275-97ba-7906ebb9a899&pf_rd_r=948ZWC294VKMXTH6JFWV&pd_rd_wg=upnHN&pd_rd_r=61eef23b-289d-47bd-9ace-9691d3995815&pd_rd_i=8426403271',
+    available: true
   },
   {
     id: '2',
@@ -19,7 +23,8 @@ const mockBooks = [
     imageLink: 'https://m.media-amazon.com/images/I/71B7-8nxIeL._SY425_.jpg',
     category: ['Novela Histórica'],
     language: 'Castellano',
-    link: 'https://www.amazon.es/Tres-enigmas-Organizaci%C3%B3n-Biblioteca-Breve/dp/8432242829/ref=sr_1_5?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-5'
+    link: 'https://www.amazon.es/Tres-enigmas-Organizaci%C3%B3n-Biblioteca-Breve/dp/8432242829/ref=sr_1_5?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-5',
+    available: true
   },
   {
     id: '3',
@@ -28,7 +33,8 @@ const mockBooks = [
     imageLink: 'https://m.media-amazon.com/images/I/81xbWl5vHuL._SY425_.jpg',
     category: ['Novela Histórica'],
     language: 'Castellano',
-    link: 'https://www.amazon.es/Carta-una-desconocida-Stefan-Zweig-ebook/dp/B0BJW4844Y/ref=sr_1_7?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-7'
+    link: 'https://www.amazon.es/Carta-una-desconocida-Stefan-Zweig-ebook/dp/B0BJW4844Y/ref=sr_1_7?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-7',
+    available: true
   },
   {
     id: '4',
@@ -37,16 +43,32 @@ const mockBooks = [
     imageLink: 'https://m.media-amazon.com/images/I/71sOSrd+JxL._SY425_.jpg',
     category: ['Novela Histórica'],
     language: 'Castellano',
-    link: 'https://www.amazon.es/1984-Contempor%C3%A1nea-CONTEMPORANEA-George-Orwell/dp/8499890946/ref=sr_1_13?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-13'
+    link: 'https://www.amazon.es/1984-Contempor%C3%A1nea-CONTEMPORANEA-George-Orwell/dp/8499890946/ref=sr_1_13?qid=1706902089&refinements=p_n_feature_browse-bin%3A15428535031&rnid=831437031&s=books&sr=1-13',
+    available: false
   }
 ]
 
 const App = (): JSX.Element => {
-  const [books, setBooks] = useState(mockBooks)
+  const [books] = useState(mockBooks)
+  const [filterSelected, setFilterSelected] = useState<FilterValue>(BOOK_FILTERS.ALL)
+
+  const handleFilterChange = (filter: FilterValue): void => {
+    setFilterSelected(filter)
+  }
+
+  const filteredBooks = books.filter(book => {
+    if (filterSelected === BOOK_FILTERS.AVAILABLE) return book.available
+    if (filterSelected === BOOK_FILTERS.OUTOFSTOCK) return !book.available
+    return book
+  })
 
   return (
-    <div className='list-books'>
-      <Books books={books} />
+    <div className='content'>
+      <Header
+        filterSelected={filterSelected}
+        handleFilterChange={handleFilterChange}
+      />
+      <Books books={filteredBooks} />
     </div>
   )
 }
