@@ -1,0 +1,8 @@
+.books {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  margin: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 125px));
+  column-gap: 4rem;
+}

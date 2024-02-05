@@ -4,8 +4,19 @@ import { sampleBooks } from './data.ts'
 function App() {
 
   return (
-    <div>
-      <header>Kimbombook</header>
+    <div className='section'>
+      <header>
+        <nav>
+          <div>
+              <p>Kimbombook</p>
+          </div>
+          <ul>
+            <li><a href="">Inicio</a></li>
+            <li><a href="">Sobre nosotros</a></li>
+            <li><a href="">Contacto</a></li>
+          </ul>
+        </nav>
+      </header>
 
       <main>
         <ul>
