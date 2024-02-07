@@ -1,18 +1,20 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import bookRouter from './routes/books'
 
+// import Book from './models/Book'
+
 const app = express()
+
 app.use(express.json())
 
 const PORT = 3000
 
-app.get('/ping', (_req, res) => {
-  console.log('Someone pinged here!')
-  res.send('pong');
-});
-
 app.use('/api/books', bookRouter)
 
-app.listen(PORT, () => {
-  console.log(`Server running on port  ${PORT}`)
+mongoose.connect(
+  'mongodb+srv://dgonzalezi:mesaBlanca24@kimbombook.daus0jo.mongodb.net/'
+).then(() => {
+  console.log(`Listening on PORT ${PORT}`)
+  app.listen(PORT)
 })
