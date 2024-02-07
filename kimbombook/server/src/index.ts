@@ -1,5 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import { config } from 'dotenv'
+config()
+
 import bookRouter from './routes/books'
 
 // import Book from './models/Book'
@@ -12,9 +15,7 @@ const PORT = 3000
 
 app.use('/api/books', bookRouter)
 
-mongoose.connect(
-  'mongodb+srv://dgonzalezi:mesaBlanca24@kimbombook.daus0jo.mongodb.net/'
-).then(() => {
+mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`Listening on PORT ${PORT}`)
   app.listen(PORT)
 })
