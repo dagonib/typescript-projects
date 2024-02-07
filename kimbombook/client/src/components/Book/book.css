@@ -1,0 +1,28 @@
+.book {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  width: 200px;
+  padding: 1rem;
+}
+
+.book__image img {
+  max-height: 230px;
+  margin-bottom: 0.5rem;
+}
+
+.book h3 {
+  font-family: var(--font-alt);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.book a {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(194, 170, 16);
+}
