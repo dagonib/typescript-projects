@@ -1,22 +1,11 @@
-import { type FilterValue } from '../../types'
-import { Filters } from '../Filters/Filters'
 import './header.css'
 
-interface Props {
-  filterSelected: FilterValue
-  handleFilterChange: (filter: FilterValue) => void
-}
-
-export const Header: React.FC<Props> = ({
-  filterSelected,
-  handleFilterChange
-}) => {
+const Header: React.FC = () => {
   return (
     <header className='header'>
-      <Filters
-        filterSelected={filterSelected}
-        onFilterChange={handleFilterChange}
-      />
+        Header
     </header>
   )
 }
+
+export default Header

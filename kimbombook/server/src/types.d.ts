@@ -1,16 +1,17 @@
-import { Category, Language } from "./enums";
+import { ECategory, ELanguage } from "./enums";
 
-export interface Book {
-  id: number;
+export interface IBook {
+  id: string;
+  author: string;
   title: string;
   description: string;
   imageLink: string;
-  category: Category;
-  language: Language;
+  category: ECategory;
+  language: ELanguage;
   link: string;
   available: boolean;
 }
 
 // export type NonInfoBook = Pick<Book, 'id' | 'title' | 'imageLink' | 'link'>
-export type NonInfoBook = Omit<Book, 'description' | 'category' | 'language' | 'available'>
-export type newBookEntry = Omit<Book, 'id'>
+export type TNonInfoBook = Omit<Book, 'description' | 'category' | 'language' | 'available'>
+export type TnewBookEntry = Omit<Book, 'id'>

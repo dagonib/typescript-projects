@@ -1,17 +1,19 @@
-import express from 'express'
-import mongoose from 'mongoose'
 import { config } from 'dotenv'
 config()
 
-import bookRouter from './routes/books'
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+
+import bookRouter from './routes/bookRoutes'
 
 // import Book from './models/Book'
+const PORT = 3000
 
 const app = express()
 
+app.use(cors({ origin: '*'}))
 app.use(express.json())
-
-const PORT = 3000
 
 app.use('/api/books', bookRouter)
 

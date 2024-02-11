@@ -1,11 +1,11 @@
-export enum Category {
+export enum ECategory {
   Historica = 'histórica',
   Tremendismo = 'tremendismo',
-  Sesenta = 'años 60',
+  Sesenta = 'años60',
   Social = 'social'
 }
 
-export enum Language {
+export enum ELanguage {
   Castellano = 'castellano',
   Catalan = 'catalan'
 }

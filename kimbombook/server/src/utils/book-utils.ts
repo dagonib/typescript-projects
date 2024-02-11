@@ -11,6 +11,14 @@ const parseTitle = (titleFromRequest: any): string => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseAuthor = (authorFromRequest: any): string => {
+  if (!isString(authorFromRequest)) {
+    throw new Error('Incorrect or missing author')
+  }
+  return authorFromRequest
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseDescription = (descriptionFromRequest: any): string => {
   if (!isString(descriptionFromRequest)) {
     throw new Error('Incorrect or missing description')
@@ -72,6 +80,7 @@ const isLanguage = (param: any): boolean => {
 export const toNewBook = (object: any): newBookEntry => {
   const newBook: newBookEntry = {
     title: parseTitle(object.title),
+    author: parseAuthor(object.author),
     description: parseDescription(object.description),
     category: parseCategory(object.category),
     language: parseLanguage(object.language),

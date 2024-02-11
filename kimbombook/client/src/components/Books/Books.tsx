@@ -6,13 +6,14 @@ interface Props {
   books: ListOfBooks
 }
 
-export const Books: React.FC<Props> = ({ books }) => {
+const Books: React.FC<Props> = ({ books }) => {
   return (
     <ul className='books'>
       {books.map((book) => (
-        <li key={book.id}>
+        <li key={book._id}>
           <Book
-            id={book.id}
+            _id={book._id}
+            author={book.author}
             title={book.title}
             description={book.description}
             imageLink={book.imageLink}
@@ -26,3 +27,5 @@ export const Books: React.FC<Props> = ({ books }) => {
     </ul>
   )
 }
+
+export default Books

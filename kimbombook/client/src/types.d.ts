@@ -1,7 +1,8 @@
 import { type BOOK_FILTERS } from './consts'
 
 export interface Book {
-  id: string
+  _id: string
+  author: string
   title: string
   description: string
   imageLink: string
@@ -12,6 +13,7 @@ export interface Book {
 }
 
 export type BookId = Pick<Book, 'id'>
+export type Title = Pick<Book, 'titlte'>
 
 export type ListOfBooks = Book[]
 
