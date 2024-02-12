@@ -3,7 +3,7 @@ import './header.css'
 const Header: React.FC = () => {
   return (
     <header className='header'>
-        Header
+        <h1>Kimbombook</h1>
     </header>
   )
 }

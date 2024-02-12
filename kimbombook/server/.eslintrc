@@ -12,7 +12,10 @@
     "rules": {
       "no-console": 1,       // Means warning
       "no-dupe-else-if": 1,  // Means warning
-      "camelcase": 1       // Means warning
+      "camelcase": 1,       // Means warning
+      "react-refresh/only-export-components": "warn",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-floating-promises": "off"
       //"no-ternary":1       // Means warning
       // "prettier/prettier": ["error", {
       //   "endOfLine":"auto"

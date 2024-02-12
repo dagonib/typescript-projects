@@ -1,12 +1,23 @@
-import { type ListOfBooks } from '../../types'
-import { Book } from '../Book/Book'
+import Book from '../Book/Book'
 import './books.css'
+import { useBookStore } from '../../store/booksStore'
+import { useEffect } from 'react'
 
-interface Props {
-  books: ListOfBooks
-}
+const Books: React.FC = () => {
+  const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
+  const books = useBookStore(state => state.books)
 
-const Books: React.FC<Props> = ({ books }) => {
+  useEffect(() => {
+    async function fetchBooksFromStore (): Promise<void> {
+      try {
+        await fetchBooksStore()
+      } catch (error) {
+        console.error('Error fetching books from store: ', error)
+      }
+    }
+    fetchBooksFromStore().catch(error => { console.error('Error fetching books: ', error) })
+  }, [])
+
   return (
     <ul className='books'>
       {books.map((book) => (

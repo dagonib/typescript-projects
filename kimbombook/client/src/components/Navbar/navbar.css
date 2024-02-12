@@ -1,0 +1,36 @@
+.kbk__navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.kbk__navbar-filters {
+  display: flex;
+  flex-direction: row;
+}
+
+.kbk__navbar-filters input {
+  padding: 0.5rem;
+  height: 40px;
+  background: rgb(255, 255, 255);
+  border: none;
+  font-family: var(--font-alt);
+}
+
+.kbk__navbar-filters button {
+  font-family: var(--font-alt);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background-color: rgb(194, 170, 16);
+  border: none;
+}
+
+.kbk__navbar-sign button {
+  border: none;
+  font-family: var(--font-alt);
+  font-size: 0.7rem;
+  color: #afafaf;
+}

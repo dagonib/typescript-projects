@@ -1,29 +1,35 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import './book.css'
 import { type Book as BookType } from '../../types'
-// import { deleteBook } from '../../api/deleteBook'
+import { useBookStore } from '../../store/booksStore'
 
 type Props = BookType
 
-export const Book: React.FC<Props> = ({ _id, author, title, imageLink, link }) => {
-  // function handleDeleteBook (bookId: string): void {
-  //   deleteBook(bookId)
-  //     .then(() => {
-  //       console.log('Book deleted successfully')
-  //     })
-  //     .catch(error => {
-  //       console.error('Error deleting the book:', error)
-  //     })
-  // }
+const Book: React.FC<Props> = ({ _id, author, title, imageLink, link }) => {
+  const deleteBookStore = useBookStore(state => state.deleteBookStore)
+  const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
+
+  const handleDeleteBook = async (bookId: string): Promise<void> => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/await-thenable, @typescript-eslint/no-confusing-void-expression
+      await deleteBookStore(bookId)
+      await fetchBooksStore()
+    } catch (error) {
+      console.log('Error deleting book: ', error)
+    }
+  }
 
   return (
     <div className='book' key={_id}>
-        <div className='book__image'>
-          <img src={imageLink} alt={title} />
+        <img src={imageLink} alt={title} />
+        <div className='book__content'>
+          <h3>{title}</h3>
+          <p>{author}</p>
+          <a href={link} target='_blank' rel='noreferrer'>Comprar</a>
         </div>
-        <p>{author}</p>
-        <p>{title}</p>
-        <a href={link} target='_blank' rel='noreferrer'>Comprar</a>
-        {/* <button onClick={() => { handleDeleteBook(_id) }}>Delete</button> */}
+        <button onClick={ () => { handleDeleteBook(_id) } }>Delete</button>
     </div>
   )
 }
+
+export default Book

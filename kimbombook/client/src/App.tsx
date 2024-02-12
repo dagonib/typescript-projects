@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import HomePage from './pages/HomePage'
-import Header from './components/Header/Header'
+import Navbar from './components/Navbar/Navbar'
 
 // const mockBooks = [
 //   {
@@ -53,12 +53,14 @@ import Header from './components/Header/Header'
 const App = (): JSX.Element => {
   return (
     <Router>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </main>
+      <div className='app'>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   )
 }
