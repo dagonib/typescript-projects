@@ -1,4 +1,5 @@
 import { type BOOK_FILTERS } from './consts'
+import { type ELanguage, type ECategory } from './enums'
 
 export interface Book {
   _id: string
@@ -6,8 +7,8 @@ export interface Book {
   title: string
   description: string
   imageLink: string
-  category: string[]
-  language: string
+  category: ECategory
+  language: ELanguage
   link: string
   available: boolean
 }

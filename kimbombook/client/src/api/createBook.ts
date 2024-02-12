@@ -1,7 +1,8 @@
 import { API_URL } from './config'
 import { type Book } from '../types'
+import { type ECategory, type ELanguage } from '../enums'
 
-export async function createBook (title: string, author: string, description: string, imageLink: string, category: string, language: string, link: string, available: string): Promise<Book> {
+export async function createBook (title: string, author: string, description: string, imageLink: string, category: ECategory, language: ELanguage, link: string, available: boolean): Promise<Book> {
   const response = await fetch(`${API_URL}/books`, {
     method: 'POST',
     body: JSON.stringify({

@@ -1,4 +1,14 @@
-form {
+.form {
   display: flex;
   flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.form__input {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
 }
