@@ -1,4 +1,4 @@
-import { newBookEntry } from "../types"
+import { newBookEntry } from "../types/types"
 import { Category, Language } from "../enums"
 import { isBoolean, isString } from "./general-utils"
 

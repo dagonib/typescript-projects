@@ -1,4 +1,4 @@
-import { ECategory, ELanguage } from "./enums";
+import { ECategory, ELanguage } from "../enums";
 
 export interface IBook {
   id: string;
