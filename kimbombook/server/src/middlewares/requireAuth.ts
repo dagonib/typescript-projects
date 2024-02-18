@@ -12,12 +12,13 @@ const requireAuth = (req: RequestWithUser, res: Response, next: NextFunction) =>
   const token = authHeader.split(' ')[1]
 
   if (!token) return res.status(401).json({
-    message: "Unauthorized"
+    message: "Not Authorized"
   })
   
+  
   jwt.verify(token, 'secret', (err, user) => {
-    if (err) return res.status(401).json({
-      message: "Unauthorized"
+    if (err) return res.status(403).json({
+      message: "Forbidden"
     })
     req.user = user
     next()
