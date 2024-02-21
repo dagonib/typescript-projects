@@ -1,0 +1,10 @@
+.createbook {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createbook h3 {
+  color: #e4e2f4;
+}

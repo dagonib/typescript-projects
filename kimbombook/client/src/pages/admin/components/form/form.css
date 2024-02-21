@@ -1,0 +1,85 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  row-gap: 2rem;
+  width: 100%;
+}
+
+.form__content {
+  display: flex;
+  flex-direction: row;
+  column-gap: 3rem;
+  width: 100%;
+}
+
+.form__content--left, .form__content--right {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  flex: 1;
+}
+
+.form__input {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__select {
+  height: auto;
+  max-width: 100%;
+  flex: 1;
+}
+
+.form__content .form__input input, 
+.form__content .form__input select, 
+.form__content .form__input textarea {
+  height: 45px;
+  width: 100%;
+  background: #e4e2f4;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  color: #333333;
+  font-size: 1rem;
+  padding: 0px 10px;
+}
+
+.form__content .form__input textarea {
+  height: 120px;
+  resize: none;
+}
+
+.form__content .form__input label {
+  height: 45px;
+  color: #e4e2f4;
+  flex: 1;
+  margin-bottom: 0.5rem;
+}
+
+.form button {
+  font-family: var(--font-alt);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0.3rem;
+  padding: 0.5rem 1rem;
+  background-color: #b1147d;
+  border: none;
+  height: 45px;
+  width: fit-content;
+  transition: all 0.3s;
+}
+
+.form button:hover {
+  transform: scale(1.06);
+}
+
+.form .confirmation {
+  padding: 1rem;
+  background-color: rgb(114, 162, 114);
+  color: rgb(50, 50, 50);
+}

@@ -1,0 +1,12 @@
+.dashboard {
+ overflow-y: scroll; 
+ scrollbar-width: none;
+ -ms-overflow-style: none;
+ max-height: 80vh;
+ margin: 2rem;
+}
+
+.dashboard::-webkit-scrollbar {
+  display: none;
+}
+

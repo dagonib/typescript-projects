@@ -1,5 +1,6 @@
-import { useAuthStore } from '../store/auth.store'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../../store/auth.store'
+import './profilepage.css'
 
 const ProfilePage: React.FC = () => {
   const logout = useAuthStore(state => state.logout)
@@ -8,12 +9,12 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div>
-      <p>{profile.test}</p>
+      <p>{profile.email}</p>
 
       <button
         onClick={ () => {
           logout()
-          navigate('/login')
+          navigate('/auth')
         }}
       >Logout</button>
     </div>

@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className='kbk__navbar-sign'>
-        <Link to='/login'>Login</Link>
+        <Link to='/auth'>Login</Link>
       </div>
     </nav>
   )
