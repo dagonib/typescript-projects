@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './form.css'
 import { useBookStore } from '../../../../store/booksStore'
 import { ECategory, ELanguage } from '../../../../enums'
+import { type Book } from '../../../../types'
+import { useNavigate } from 'react-router-dom'
 
-const Form: React.FC = () => {
+const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const createBookStore = useBookStore(state => state.createBookStore)
   const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
+  const updateBookStore = useBookStore(state => state.updateBookStore)
+  const navigate = useNavigate()
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -18,21 +22,44 @@ const Form: React.FC = () => {
 
   const [showConfirmation, setShowConfirmation] = useState(false)
 
+  useEffect(() => {
+    if (book != null) {
+      setTitle(book.title)
+      setAuthor(book.author)
+      setDescription(book.description)
+      setImageLink(book.imageLink)
+      setCategory(book.category)
+      setLanguage(book.language)
+      setLink(book.link)
+      setAvailable(book.available)
+    }
+  }, [book])
+
   const handleCreateBook = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
     try {
-      await createBookStore(title, author, description, imageLink, category, language, link, available)
-      setTitle('')
-      setAuthor('')
-      setDescription('')
-      setImageLink('')
-      setCategory(ECategory.Historica)
-      setLanguage(ELanguage.Castellano)
-      setLink('')
-      setAvailable(false)
-      await fetchBooksStore()
-      setShowConfirmation(true)
-      setTimeout(() => { setShowConfirmation(false) }, 3000)
+      if (book !== null && book !== undefined) {
+        await updateBookStore(book._id, title, author, description, imageLink, category, language, link, available)
+        setShowConfirmation(true)
+        setTimeout(() => {
+          setShowConfirmation(false)
+        }, 3000)
+        navigate('/admin/dashboard')
+      } else {
+        await createBookStore(title, author, description, imageLink, category, language, link, available)
+        setTitle('')
+        setAuthor('')
+        setDescription('')
+        setImageLink('')
+        setCategory(ECategory.Historica)
+        setLanguage(ELanguage.Castellano)
+        setLink('')
+        setAvailable(false)
+        await fetchBooksStore()
+        setShowConfirmation(true)
+        setTimeout(() => { setShowConfirmation(false) }, 3000)
+        navigate('/admin/dashboard')
+      }
     } catch (error) {
       console.log('Error creating book: ', error)
     }
@@ -104,10 +131,11 @@ const Form: React.FC = () => {
               }}
             >
               <option value="">Selecciona un categoría</option>
-              <option value="histórica">Histórica</option>
-              <option value="tremendismo">Tremendismo</option>
-              <option value="años60">Años 60</option>
-              <option value="social">Social</option>
+              {Object.keys(ECategory).map((key) => (
+                <option key={key} value={ECategory[key as keyof typeof ECategory]}>
+                  {ECategory[key as keyof typeof ECategory]}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -122,8 +150,11 @@ const Form: React.FC = () => {
               }}
             >
               <option value="">Selecciona un idioma</option>
-              <option value="castellano">Castellano</option>
-              <option value="catalan">Catalan</option>
+              {Object.keys(ELanguage).map((key) => (
+                <option key={key} value={ELanguage[key as keyof typeof ELanguage]}>
+                  {ELanguage[key as keyof typeof ELanguage]}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -146,17 +177,18 @@ const Form: React.FC = () => {
               id="book-available"
               value={available ? 'true' : 'false'}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                setAvailable(e.target.value === 'true')
+                const value = e.target.value === 'true'
+                setAvailable(value)
               }}
             >
               <option value="">Selecciona un categoría</option>
-              <option value="true">Sí</option>
-              <option value="false">No</option>
+              <option value='true'>Sí</option>
+              <option value='false'>No</option>
             </select>
           </div>
         </div>
       </div>
-      <button>Crear Libro</button>
+      <button>{book !== null && book !== undefined ? 'Actualizar' : 'Crear Libro'}</button>
       {showConfirmation && <p className='confirmation'>Libro creado correctamente.</p>}
     </form>
   )

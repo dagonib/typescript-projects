@@ -8,6 +8,7 @@ import Menu from '../components/menu/Menu'
 import './adminpage.css'
 import TopContainer from '../components/topcontainer/TopContainer'
 import CreateBookPage from '../createbook/CreateBookPage'
+import EditBookPage from '../edit/EditBookPage'
 
 const AdminPage: React.FC = () => {
   const isAuth = useAuthStore(state => state.isAuth)
@@ -31,6 +32,14 @@ const AdminPage: React.FC = () => {
             element= {
               <ProtectedRoute isAllowed={isAuth}>
                 <CreateBookPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='edit-book/:bookId'
+            element= {
+              <ProtectedRoute isAllowed={isAuth}>
+                <EditBookPage />
               </ProtectedRoute>
             }
           />

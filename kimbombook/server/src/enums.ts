@@ -1,11 +1,16 @@
 export enum ECategory {
   Historica = 'histórica',
-  Tremendismo = 'tremendismo',
+  Tremendismo = 'Tremendismo y Existencialismo',
   Sesenta = 'años60',
-  Social = 'social'
+  Social = 'social',
+  Postguerra = 'Literatura de Postguerra',
+  GenPerdida = 'Generación Perdida',
+  Realismo = 'Realismo',
+  RealismoMágico = 'Realismo Mágico',
+  CienciaFicción = 'Ciencia Ficción'
 }
 
 export enum ELanguage {
-  Castellano = 'castellano',
-  Catalan = 'catalan'
+  Castellano = 'Castellano',
+  Catalan = 'Catalan'
 }

@@ -11,11 +11,11 @@ const BookSchema = new Schema({
   imageLink: String,
   category: {
     type: String,
-    enum: ECategory
+    enum: Object.values(ECategory)
   },
   language: {
     type: String,
-    enum: ELanguage
+    enum: Object.values(ELanguage)
   },
   link: String,
   available: Boolean,

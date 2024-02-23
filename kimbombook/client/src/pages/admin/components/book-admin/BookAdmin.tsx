@@ -3,6 +3,7 @@ import { type Book as BookType } from '../../../../types'
 import { AiFillEdit } from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md'
 import { useBookStore } from '../../../../store/booksStore'
+import { Link } from 'react-router-dom'
 
 type Props = BookType
 
@@ -47,7 +48,7 @@ const BookAdmin: React.FC<Props> = ({
           <p>Disponible: {available ? 'Sí' : 'No'}</p>
         </div>
         <div className='book-admin__actions'>
-            <button><AiFillEdit /></button>
+             <Link to={`/admin/edit-book/${_id}`}><AiFillEdit /></Link>
             <button onClick={ () => { void handleDeleteBook(_id) } }><MdDelete /></button>
         </div>
       </div>

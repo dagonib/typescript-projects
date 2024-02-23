@@ -1,9 +1,7 @@
 import { create } from 'zustand'
 
 import { type Book, type ListOfBooks } from '../types'
-import { getBooks } from '../api/getBooks'
-import { deleteBook } from '../api/deleteBook'
-import { createBook } from '../api/createBook'
+import { getBooks, createBook, deleteBook, getBookById, updateBook } from '../api/book'
 import { type ECategory, type ELanguage } from '../enums'
 
 interface State {
@@ -11,6 +9,18 @@ interface State {
   fetchBooksStore: () => Promise<void>
   deleteBookStore: (bookId: string) => void
   createBookStore: (
+    title: string,
+    author: string,
+    description: string,
+    imageLink: string,
+    category: ECategory,
+    language: ELanguage,
+    link: string,
+    available: boolean
+  ) => Promise<Book | undefined>
+  getBookByIdStore: (bookId: string) => Promise<Book | undefined>
+  updateBookStore: (
+    bookId: string,
     title: string,
     author: string,
     description: string,
@@ -67,6 +77,44 @@ export const useBookStore = create<State>((set) => {
         await deleteBook(bookId)
       } catch (error) {
         console.log('Error deleting book: ', error)
+      }
+    },
+
+    getBookByIdStore: async (bookId: string): Promise<Book | undefined> => {
+      try {
+        const book = await getBookById(bookId)
+        return book
+      } catch (error) {
+        console.log('Error getting the book: ', error)
+      }
+    },
+
+    updateBookStore: async (
+      bookId: string,
+      title: string,
+      author: string,
+      description: string,
+      imageLink: string,
+      category: ECategory,
+      language: ELanguage,
+      link: string,
+      available: boolean
+    ): Promise<Book | undefined> => {
+      try {
+        const updatedBook = await updateBook(
+          bookId,
+          title,
+          author,
+          description,
+          imageLink,
+          category,
+          language,
+          link,
+          available
+        )
+        return updatedBook
+      } catch (error) {
+        console.log('Error updating book: ', error)
       }
     }
   }
