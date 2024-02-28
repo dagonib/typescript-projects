@@ -1,0 +1,139 @@
+header {
+  width: 100%;
+  overflow: hidden;
+}
+
+.header-container {
+  max-width: 1880px !important;
+  width: 90%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 50px 0;
+}
+
+.header-wrapper {
+  display: grid;
+  grid-template-columns: auto 280px;
+  align-items: center;
+  gap: 160px;
+  margin: 0 auto;
+  height: 100% !important;
+  width: 90% !important;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  margin-bottom: 75px;
+}
+
+.header-left h5 {
+  color: var(--color-primary);
+}
+
+.slider-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+}
+
+.slidebutton {
+  display: inline-block;
+  font-size: 18px;
+  color: var(--color-dark);
+  border-radius: 50%;
+  padding: 20px;
+  border: 1px solid var(--color-dark-Ex);
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.slidebutton:hover {
+  background: var(--color-dark-Ex);
+}
+
+.swiper-pagination {
+  left: 0;
+  width: fit-content !important;
+  position: relative !important;
+  align-items: center !important;
+  display: flex !important;
+  gap: 20px !important;
+  margin-top: 100px;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 1256px) {
+  .header-wrapper {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 1190px) {
+  .header-wrapper {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .header-wrapper {
+    grid-template-columns: auto 340px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .header-container {
+    width: 97% !important;
+    padding: 100px 0;
+  }
+
+  .header-wrapper {
+    width: 92% !important;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    text-align: center;
+  }
+
+  .header-right {
+    grid-row: 1;
+    margin: 0 auto;
+    width: 35%;
+  }
+
+  .header-left p {
+    margin-top: 10px;
+  }
+
+  .header-left .btn {
+    margin: auto;
+  }
+
+  .slidebutton {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-right {
+    width: 50%;
+  }
+
+  .slidebutton {
+    padding: 14px;
+  }
+
+  .slider-button {
+    top: -26%;
+  }
+}

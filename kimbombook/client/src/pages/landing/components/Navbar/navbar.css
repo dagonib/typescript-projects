@@ -1,0 +1,18 @@
+nav {
+  height: 60px;
+  display: grid;
+  place-items: center;
+  position: sticky;
+  background: var(--color-bg-1);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-link {
+  color: var(--color-dark);
+  font-size: 16px;
+}

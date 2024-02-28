@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './menu.css'
 import { FaSignOutAlt } from 'react-icons/fa'
 import { GiBookshelf, GiWhiteBook } from 'react-icons/gi'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '../../../../store/auth.store'
 
 interface IconProps {
@@ -23,7 +23,7 @@ const Menu: React.FC = () => {
 
   return (
     <menu>
-      <h4>Kimbombook</h4>
+      <Link to='/'>Kimbombook</Link>
 
       <div className='menu-box'>
         <ul className='menu-top'>

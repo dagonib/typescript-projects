@@ -1,0 +1,15 @@
+.libraria {
+  display: grid;
+  grid: "sidebar body" 1fr / 200px 1fr;
+  gap: 2rem;
+}
+
+.libraria__sidebar {
+  grid-area: sidebar;
+  padding: 2rem 1rem;
+}
+
+.libraria__body {
+  grid-area: body;
+  padding: 2rem;
+}

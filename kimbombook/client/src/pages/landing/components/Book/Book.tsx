@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import './book.css'
-import { type Book as BookType } from '../../types'
+import { type Book as BookType } from '../../../../types'
 
 type Props = BookType
 

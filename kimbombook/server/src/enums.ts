@@ -1,13 +1,15 @@
 export enum ECategory {
-  Historica = 'histórica',
+  All = 'Todo',
+  Historica = 'Novela Histórica',
   Tremendismo = 'Tremendismo y Existencialismo',
-  Sesenta = 'años60',
-  Social = 'social',
+  Sesenta = 'Novela Años Sesenta',
+  Social = 'Generación Medio Siglo: Novela Social',
   Postguerra = 'Literatura de Postguerra',
   GenPerdida = 'Generación Perdida',
-  Realismo = 'Realismo',
+  Realismo = 'Novela Realista',
   RealismoMágico = 'Realismo Mágico',
-  CienciaFicción = 'Ciencia Ficción'
+  CienciaFicción = 'Novela Ciencia Ficción',
+  GeneraciónX = 'Generación X'
 }
 
 export enum ELanguage {

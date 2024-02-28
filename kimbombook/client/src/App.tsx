@@ -1,4 +1,5 @@
-import Navbar from './components/Navbar/Navbar'
+import Footer from './pages/admin/components/footer/Footer'
+import Navbar from './pages/landing/components/Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 
 const App = (): JSX.Element => {
@@ -6,6 +7,7 @@ const App = (): JSX.Element => {
     <div className='app'>
       <Navbar />
       <Outlet />
+      <Footer />
     </div>
   )
 }
