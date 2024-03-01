@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom'
-import Header from '../components/Header/Header'
+import Header from './Header/Header'
+import FeaturesBooks from './FeaturesBooks/FeaturesBooks'
+import RecommendedCollections from './RecommendedCollections/RecommendedCollections'
 
 const HomePage: React.FC = () => {
   return (
     <>
       <Header />
-      <section className='home'>
-        <p>HomePage</p>
-        <Link to={'/libraria'}>Catalogo</Link>
-      </section>
+      <FeaturesBooks />
+      <RecommendedCollections />
     </>
   )
 }

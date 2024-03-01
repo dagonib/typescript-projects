@@ -1,0 +1,89 @@
+.recommended-collections__container {
+  border-bottom: 1px solid var(--color-dark-Ex);
+  padding-bottom: 56px;
+}
+
+.recommended-collections__filter-buttons {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 66px ;
+}
+
+.recommended-collections__filter-buttons button {
+  font-size: 16px;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  transition: var(--transition);
+  padding-bottom: 6px;
+  border-bottom: 3px solid transparent;
+}
+
+.recommended-collections__filter-buttons button:hover {
+  color: var(--color-black);
+}
+
+.recommended-collections__filter-buttons .active {
+  border-bottom: 3px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.recommended-collections__gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+}
+
+.recommended-collections__gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+  animation: Gani forwards 400ms ease;
+}
+
+@keyframes GAni {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.recommended-collections__gallery-item__image {
+  background: var(--color-light);
+}
+
+@media (max-width: 1024px) {
+  .recommended-collections__filter-buttons {
+    gap: 20px;
+  }
+
+  .recommended-collections__gallery {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 36px ;
+  }
+}
+
+@media (max-width: 780px) {
+  .recommended-collections__gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .recommended-collections__gallery {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .recommended-collections__gallery-item {  
+    gap: 5px;
+  }
+}
