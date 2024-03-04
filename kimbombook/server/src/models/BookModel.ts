@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ECategory, ELanguage } from "../enums";
+import { ELanguage } from "../enums";
 
 const Schema = mongoose.Schema
 // const ObjectId = mongoose.Types.ObjectId
@@ -9,10 +9,7 @@ const BookSchema = new Schema({
   author: String,
   description: String,
   imageLink: String,
-  category: {
-    type: String,
-    enum: Object.values(ECategory)
-  },
+  categories: [String],
   language: {
     type: String,
     enum: Object.values(ELanguage)

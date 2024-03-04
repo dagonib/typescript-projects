@@ -1,14 +1,14 @@
 import './librariapage.css'
 import Books from '../components/Books/Books'
 import { FilterProvider } from '../../../context/FilterProvider'
-import Filters from '../components/Filters/Filters'
+import CategoriesButtons from '../components/CategoriesButtons/CategoriesButtons'
 
 const LibrariaPage: React.FC = () => {
   return (
     <FilterProvider>
       <main className='libraria'>
         <div className='libraria__sidebar'>
-          <Filters />
+          <CategoriesButtons />
         </div>
 
         <div className='libraria__body'>

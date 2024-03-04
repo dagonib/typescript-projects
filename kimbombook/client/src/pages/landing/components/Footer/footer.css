@@ -1,7 +1,10 @@
 footer {
   padding: 10px 0;
   margin-top: 56px;
-  border-top: 1px solid var(--color-dark)
+  border-top: 1px solid var(--color-dark);
+  position: bottom;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer__container {

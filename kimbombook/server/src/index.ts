@@ -5,8 +5,10 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
-import bookRouter from './routes/bookRoutes'
+import bookRoutes from './routes/bookRoutes'
 import authRoutes from './routes/auth.routes'
+import authorRoutes from './routes/author.routes'
+import categoryRoutes from './routes/category.routes'
 
 // import Book from './models/Book'
 const PORT = 3000
@@ -19,8 +21,10 @@ app.use(cors({
 }))
 app.use(express.json())
 
-app.use('/api/books', bookRouter)
+app.use('/api/books', bookRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/authors', authorRoutes)
+app.use('/api/categories', categoryRoutes)
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`Listening on PORT ${PORT}`)

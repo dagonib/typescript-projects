@@ -1,7 +1,8 @@
 .libraria {
   display: grid;
-  grid: "sidebar body" 1fr / 200px 1fr;
+  grid: "sidebar body" 1fr / 300px 1fr;
   gap: 2rem;
+  min-height: 100vh;
 }
 
 .libraria__sidebar {
