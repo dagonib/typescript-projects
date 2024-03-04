@@ -13,7 +13,7 @@ interface State {
     author: string,
     description: string,
     imageLink: string,
-    category: ECategory,
+    category: string,
     language: ELanguage,
     link: string,
     available: boolean
@@ -25,7 +25,7 @@ interface State {
     author: string,
     description: string,
     imageLink: string,
-    category: ECategory,
+    category: string,
     language: ELanguage,
     link: string,
     available: boolean
@@ -50,12 +50,13 @@ export const useBookStore = create<State>((set) => {
       author: string,
       description: string,
       imageLink: string,
-      category: ECategory,
+      category: string,
       language: ELanguage,
       link: string,
       available: boolean
     ): Promise<Book | undefined> => {
       try {
+        console.log('Creating book', title, author, description, imageLink, category, language, link, available)
         const createdBook = await createBook(
           title,
           author,
@@ -95,8 +96,8 @@ export const useBookStore = create<State>((set) => {
       author: string,
       description: string,
       imageLink: string,
-      category: ECategory,
-      language: ELanguage,
+      category: string,
+      language: string,
       link: string,
       available: boolean
     ): Promise<Book | undefined> => {
@@ -107,8 +108,8 @@ export const useBookStore = create<State>((set) => {
           author,
           description,
           imageLink,
-          category,
-          language,
+          category as ECategory, // Convert category to ECategory type
+          language as ELanguage,
           link,
           available
         )

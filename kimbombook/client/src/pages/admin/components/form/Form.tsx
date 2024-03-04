@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react'
 import './form.css'
+// import { useCategoryStore } from '../../../../store/category.store'
 import { useBookStore } from '../../../../store/booksStore'
-import { ECategory, ELanguage } from '../../../../enums'
+import { ELanguage } from '../../../../enums'
 import { type Book } from '../../../../types'
 import { useNavigate } from 'react-router-dom'
+import useFetchCategoriesFromStore from '../../../../hooks/useFetchCategoriesFromStore'
+import useFetchAuthorsFromStore from '../../../../hooks/useFetchAuthorsFromStore'
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const createBookStore = useBookStore(state => state.createBookStore)
   const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
   const updateBookStore = useBookStore(state => state.updateBookStore)
+
+  const listOFCategories = useFetchCategoriesFromStore()
+  const authors = useFetchAuthorsFromStore()
+
   const navigate = useNavigate()
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [description, setDescription] = useState('')
   const [imageLink, setImageLink] = useState('')
-  const [category, setCategory] = useState<ECategory>(ECategory.Historica)
+  const [categories, setCategories] = useState('')
   const [language, setLanguage] = useState<ELanguage>(ELanguage.Castellano)
   const [link, setLink] = useState('')
   const [available, setAvailable] = useState(false)
@@ -28,7 +35,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
       setAuthor(book.author)
       setDescription(book.description)
       setImageLink(book.imageLink)
-      setCategory(book.category)
+      setCategories(book.categories)
       setLanguage(book.language)
       setLink(book.link)
       setAvailable(book.available)
@@ -39,19 +46,20 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     e.preventDefault()
     try {
       if (book !== null && book !== undefined) {
-        await updateBookStore(book._id, title, author, description, imageLink, category, language, link, available)
+        await updateBookStore(book._id, title, author, description, imageLink, categories, language, link, available)
         setShowConfirmation(true)
         setTimeout(() => {
           setShowConfirmation(false)
         }, 3000)
         navigate('/admin/dashboard')
       } else {
-        await createBookStore(title, author, description, imageLink, category, language, link, available)
+        console.log('Creating book', title, author, description, imageLink, categories, language, link, available)
+        await createBookStore(title, author, description, imageLink, categories, language, link, available)
         setTitle('')
         setAuthor('')
         setDescription('')
         setImageLink('')
-        setCategory(ECategory.Historica)
+        setCategories('')
         setLanguage(ELanguage.Castellano)
         setLink('')
         setAvailable(false)
@@ -84,14 +92,21 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
 
           {/* Author */}
           <div className='form__input'>
-            <label htmlFor="book-author">Autor</label>
-            <input
+            <label htmlFor="book-author">Autores</label>
+            <select
               id="book-author"
               value={author}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setAuthor(e.target.value)
               }}
-            />
+            >
+              <option value="">Selecciona un autor</option>
+              {authors.map((author) => (
+                <option key={author._id} value={author._id}>
+                  {author.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Description */}
@@ -125,15 +140,15 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
             <label htmlFor="book-category">Categoría</label>
             <select
               id="book-category"
-              value={category}
+              value={categories}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                setCategory(e.target.value as ECategory)
+                setCategories(e.target.value)
               }}
             >
               <option value="">Selecciona un categoría</option>
-              {Object.keys(ECategory).map((key) => (
-                <option key={key} value={ECategory[key as keyof typeof ECategory]}>
-                  {ECategory[key as keyof typeof ECategory]}
+              {listOFCategories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
                 </option>
               ))}
             </select>

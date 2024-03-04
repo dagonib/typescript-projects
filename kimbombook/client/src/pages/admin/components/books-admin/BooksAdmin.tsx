@@ -28,7 +28,7 @@ const BooksAdmin: React.FC = () => {
             title={book.title}
             description={book.description}
             imageLink={book.imageLink}
-            category={book.category}
+            categories={book.categories}
             language={book.language}
             link={book.link}
             available={book.available}

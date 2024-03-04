@@ -9,14 +9,14 @@ export async function getBooksController (_req: Request, res: Response) {
 }
 
 export async function createBookController (req: Request, res: Response) {
-  const author = await AuthorModel.findOne({ name: req.body.author })
+  const author = await AuthorModel.findOne({ _id: req.body.author })
 
   if (!author) {
     return res.status(404).json({ error: 'Author not found' });
   }
   let categoriesIds: string[] | null = null
   if (req.body.categories) { 
-    const categories = await CategoryModel.find({ name: { $in: req.body.categories } })
+    const categories = await CategoryModel.find({ _id: { $in: req.body.categories } })
     if(categories.length === 0) {
       return res.status(404).json({ error: 'Category not found' })  
     }

@@ -12,7 +12,7 @@ const BookAdmin: React.FC<Props> = ({
   author,
   title,
   imageLink,
-  category,
+  categories,
   language,
   available
 }) => {
@@ -43,7 +43,7 @@ const BookAdmin: React.FC<Props> = ({
           <p>{author}</p>
         </div>
         <div className='book-admin__content-bottom'>
-          <p>Categoría: {category}</p>
+          <p>Categoría: {categories}</p>
           <p>Idioma: {language}</p>
           <p>Disponible: {available ? 'Sí' : 'No'}</p>
         </div>
