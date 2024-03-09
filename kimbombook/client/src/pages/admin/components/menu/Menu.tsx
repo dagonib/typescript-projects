@@ -1,55 +1,43 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './menu.css'
-import { FaSignOutAlt } from 'react-icons/fa'
-import { GiBookshelf, GiWhiteBook } from 'react-icons/gi'
-import { useNavigate, Link } from 'react-router-dom'
-import { useAuthStore } from '../../../../store/auth.store'
-
-interface IconProps {
-  icon: React.ReactNode
-  isActive: boolean
-  onClick: () => void
-}
+import { FaHome } from 'react-icons/fa'
+import { ImProfile } from 'react-icons/im'
 
 const Menu: React.FC = () => {
-  const logout = useAuthStore(state => state.logout)
-  const navigate = useNavigate()
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
-
-  const handleClick = (index: number, route: string): void => {
-    setActiveIndex(index === activeIndex ? null : index)
-    navigate(route)
-  }
-
   return (
-    <menu>
-      <Link to='/'>Kimbombook</Link>
+    <menu className='menu'>
+      {/* General */}
+      <div className="menu__item">
+        <span className="menu__item--title">MAIN</span>
+        <Link to={''} className='menu__item--link'>
+          <FaHome />
+          <span className="menu__item--name">Home</span>
+        </Link>
+        <Link to={''} className='menu__item--link'>
+          <ImProfile />
+          <span className="menu__item--name">Profile</span>
+        </Link>
+      </div>
 
-      <div className='menu-box'>
-        <ul className='menu-top'>
-          <Icon icon={<GiBookshelf />} isActive={activeIndex === 0} onClick={() => { handleClick(0, '/admin/dashboard') } } />
-          <Icon icon={<GiWhiteBook />} isActive={activeIndex === 1} onClick={() => { handleClick(1, '/admin/create-book') } } />
-        </ul>
+      {/* Libros */}
+      <div className="menu__item">
+        <span className="menu__item--title">LIBROS</span>
+        <Link to={'/admin/books'} className='menu__item--link'>
+          <FaHome />
+          <span className="menu__item--name">Lista</span>
+        </Link>
+      </div>
 
-        <ul className='menu-button'>
-          <Icon
-            icon={<FaSignOutAlt />}
-            isActive={activeIndex === 3}
-            onClick={() => {
-              handleClick(3, '/admin/dashboard')
-              logout()
-              navigate('/auth')
-            } } />
-        </ul>
+      {/* Categorias */}
+      <div className="menu__item">
+        <span className="menu__item--title">CATEGORIAS</span>
+        <Link to={''} className='menu__item--link'>
+          <FaHome />
+          <span className="menu__item--name">Lista</span>
+        </Link>
       </div>
     </menu>
   )
 }
-
-const Icon: React.FC<IconProps & { isActive: boolean, onClick: (route: string) => void }> = ({ icon, isActive, onClick }) => (
-  <li className={isActive ? 'active' : ''}>
-    <a href='#' onClick={onClick}>{icon}</a>
-  </li>
-)
 
 export default Menu

@@ -1,12 +1,9 @@
-.admin {
-  width: 100%;
-  height: 100vh;
-  background: #121026;
-  overflow: hidden;
-  display: flex;
-}
+.admin-page {
+  --bg-color-primary: #2a3447;
+  --bg-color-secondary: #384256;
+  --bg-color-dark: #222b3c;
 
-.admin .container {
-  flex: 1;
-  height: 100%;
+  --color-primary: #ffffff;
+  --color-secondary: #dddddd;
+  --color-dark: #2a3447;
 }

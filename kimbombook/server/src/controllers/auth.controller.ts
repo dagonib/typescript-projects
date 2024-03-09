@@ -6,7 +6,6 @@ import UserModel from "../models/UserModel";
 import { JWT_SECRET } from "../config";
 
 export async function signupHandler (req: Request, res: Response) {
-  // Find if user exist
   const userFound = await UserModel.findOne({
     email: req.body.email
   })

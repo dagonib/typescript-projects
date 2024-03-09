@@ -1,0 +1,12 @@
+.page-wrapper {
+  background-color: #fafafa;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  background-color: #fafafa;
+  min-height: 100vh;
+  padding: 50px 50px;
+  margin-left: 260px;
+}
