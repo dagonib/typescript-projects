@@ -1,0 +1,34 @@
+.admin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1;
+}
+
+.admin-logo a {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+.admin-logo span {
+  display: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-dark);
+  font-family: 'Nunito', sans-serif;
+}
+
+.admin-logo img {
+  max-height: 26px;
+}
+
+.admin-logo__icon {
+  color: var(--color-dark)
+}
+
+@media screen and (min-width: 992px) {
+  .admin-logo span {
+    display: block;
+  }
+}

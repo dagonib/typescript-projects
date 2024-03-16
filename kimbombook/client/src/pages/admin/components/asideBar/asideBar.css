@@ -1,0 +1,35 @@
+.admin-new-sidebar {
+  width: 150px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+}
+
+/* NAVEGACION */
+.admin-new-sidebar__nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.admin-new-sidebar__item {
+  margin-bottom: 5px;
+}
+
+.admin-new-sidebar__link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #5154f1;
+  transition: 0.3s;
+  background: #f6f9ff;
+  padding: 10px 5px;
+  border-radius: 4px;
+}
+
+.admin-new-sidebar__link i {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #5154f1;
+}

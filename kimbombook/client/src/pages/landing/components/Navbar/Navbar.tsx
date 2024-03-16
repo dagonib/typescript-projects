@@ -4,7 +4,7 @@ import { FaUserLock } from 'react-icons/fa'
 
 const Navbar: React.FC = () => {
   return (
-    <nav>
+    <nav className='nav-landing'>
       {/* Logo */}
       <div className='container nav-container'>
         <Link className='nav-logo' to={'/'}>Kimbombook</Link>

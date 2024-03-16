@@ -1,12 +1,33 @@
-.page-wrapper {
-  background-color: #fafafa;
-  min-height: 100vh;
+.baselayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.baselayout__wrapper {
+  display: flex;
+  flex: 1;
   overflow: hidden;
 }
 
-.content-wrapper {
-  background-color: #fafafa;
-  min-height: 100vh;
-  padding: 50px 50px;
-  margin-left: 260px;
+.baselayout__wrapper aside {
+  transition: all 0.3s;
+  margin-left: 0px;
 }
+
+.toggle-sidebar .baselayout__wrapper aside {
+  margin-left: -150px;
+}
+
+.baselayout__content {
+  flex: 1;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 1rem;
+}
+
+
+/* .toggle-sidebar .admin-dashboard {
+  display: none;
+} */

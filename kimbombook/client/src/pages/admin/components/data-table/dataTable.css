@@ -13,6 +13,19 @@
   margin-bottom: 20px;
 }
 
+.data-table__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.data-table__debounced {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .data-table__debounced-input {
   padding: 10px;
   background: transparent;
@@ -22,12 +35,8 @@
   border-bottom: 2px solid #4a5568;
 }
 
-.data-table__debounced-input:focus {
-  width: 33.33%;
-}
-
 .data-table__table thead {
-  background-color: #123f0b;
+  background-color: #CCE4FF;
   color: black
 }
 

@@ -2,7 +2,7 @@ import BooksAdmin from '../components/books-admin/BooksAdmin'
 import './dashboardpage.css'
 const DashBoardPage: React.FC = () => {
   return (
-    <div className='dashboard'>
+    <div className='admin-dashboard baselayout__content'>
       <BooksAdmin />
     </div>
   )

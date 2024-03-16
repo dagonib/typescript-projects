@@ -7,3 +7,21 @@
   --color-secondary: #dddddd;
   --color-dark: #2a3447;
 }
+
+.admin-page h1 {
+  font-size: 40px;
+}
+
+/*................. Max-width: 1024px .................*/
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 30px !important;
+  }
+}
+
+/*................. Max-width: 600px .................*/
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px !important;
+  }
+}

@@ -6,18 +6,17 @@ import { type ListOfBooks } from '../../../../types'
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import DebouncedInput from '../debouncedInput/DebouncedInput'
-import { FaSearch } from 'react-icons/fa'
+import { FaEdit, FaSearch } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { MdDelete } from 'react-icons/md'
 
 interface Props {
-  _id: any
-  title: string
-  author: string
   data: ListOfBooks
 }
 
 const DataTable: React.FC<Props> = ({ data }) => {
   const columnHelper = createColumnHelper()
-  console.log(data)
+
   const columns = [
     columnHelper.accessor('', {
       id: 'Id',
@@ -46,11 +45,22 @@ const DataTable: React.FC<Props> = ({ data }) => {
       size: 40
     }),
     columnHelper.accessor('available', {
-      cell: (info) => <span>{info.getValue()}</span>,
+      cell: (info) => <span>{info.getValue() ? 'True' : 'false'}</span>,
       header: 'Available',
       size: 40
+    }),
+    columnHelper.accessor('actions', {
+      cell: (info) => (
+        <div className='data-table__actions'>
+          <Link to={`/admin/edit-book/${info.row.original._id}`}>
+            <FaEdit />
+          </Link>
+          <MdDelete />
+        </div>
+      ),
+      header: 'Actions',
+      size: 40
     })
-
   ]
 
   const [books, setBooks] = useState<ListOfBooks>([])
@@ -77,14 +87,17 @@ const DataTable: React.FC<Props> = ({ data }) => {
 
   return (
     <div className='data-table'>
-      <div className='data-table__download-btn'>
-        <FaSearch />
-        <DebouncedInput
-          value={globalFilter ?? ''}
-          onChange={(value) => { setGlobalFilter(value) }}
-          className='data-table__debounced-input'
-          placeholder='Search all columns...'
-        />
+      <div className='data-table__head'>
+        <div className='data-table__debounced'>
+          <FaSearch />
+          <DebouncedInput
+            value={globalFilter ?? ''}
+            onChange={(value) => { setGlobalFilter(value) }}
+            className='data-table__debounced-input'
+            placeholder='Search all columns...'
+          />
+        </div>
+        <button className="admin-books__info--button">Add Book</button>
       </div>
 
       <table className='data-table__table'>

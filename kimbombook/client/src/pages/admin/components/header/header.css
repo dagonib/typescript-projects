@@ -1,0 +1,26 @@
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s;
+  background-color: #fff;
+  padding: 12px;
+  border-bottom: 2px solid #3d3d3d;
+}
+
+/* .admin-header .toggle-sidebar {
+  font-size: 32px;
+  padding-left: 10px;
+  cursor: pointer;
+  color: #012970
+}
+
+.toggle-sidebar .admin-new-sidebar {
+  background-color: red;
+}
+
+.toggle-sidebar .admin-new-sidebar .admin-new-sidebar__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+} */

@@ -8,8 +8,8 @@ import './adminpage.css'
 import CreateBookPage from '../createbook/CreateBookPage'
 import EditBookPage from '../edit/EditBookPage'
 import { SidebarProvider } from '../../../context/SidebarProvider'
-import Layout from '../layout/Layout'
-import BooksPage from '../books/BooksPage'
+import BooksPage from '../books/booksPage/BooksPage'
+import BaseLayout from '../layout/BaseLayout'
 
 const AdminPage: React.FC = () => {
   const isAuth = useAuthStore(state => state.isAuth)
@@ -18,7 +18,7 @@ const AdminPage: React.FC = () => {
     <SidebarProvider>
       <div className='admin-page'>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<BaseLayout />}>
             <Route
               path='dashboard'
               element= {
