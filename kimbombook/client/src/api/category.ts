@@ -19,3 +19,13 @@ export async function createCategory (name: string, description: string): Promis
   })
   return response.data
 }
+
+export async function getCategoryById (id: string): Promise<Category> {
+  const response = await axios.get(`${API_URL}/categories/${id}`)
+  return response.data
+}
+
+export async function getNameCategoryById (id: string): Promise<string> {
+  const response = await axios.get(`${API_URL}/categories/name/${id}`)
+  return response.data
+}

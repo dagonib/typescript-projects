@@ -3,9 +3,32 @@ import BookModel from '../models/BookModel'
 import AuthorModel from '../models/AuthorModel'
 import CategoryModel from '../models/CategoyModel'
 
-export async function getBooksController (_req: Request, res: Response) {
-  const books = await BookModel.find()
-  res.json(books)
+export async function getBooksController (req: Request, res: Response) {
+  const { column, order, searchValue } = req.query
+
+  try {
+    let query = BookModel.find()
+    const sortOrder = {}
+
+    if (column && order) {
+      sortOrder[column as string] = order === 'asc' ? 1 : -1
+    }
+
+    if (searchValue) {
+      const regex = new RegExp(searchValue as string, 'i')
+      query = query.or([{ title: regex }, { description: regex }])
+    }
+
+    if (Object.keys(sortOrder).length > 0) {
+      query = query.sort(sortOrder);
+    }
+    
+    const books = await query.exec()
+    
+    res.json(books)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
 }
 
 export async function createBookController (req: Request, res: Response) {
@@ -14,7 +37,9 @@ export async function createBookController (req: Request, res: Response) {
   if (!author) {
     return res.status(404).json({ error: 'Author not found' });
   }
+
   let categoriesIds: string[] | null = null
+
   if (req.body.categories) { 
     const categories = await CategoryModel.find({ _id: { $in: req.body.categories } })
     if(categories.length === 0) {
@@ -62,20 +87,25 @@ export async function updateBookController (req: Request, res: Response) {
 
   let authorId: string | null = null
   if (req.body.author) { 
-    const author = await AuthorModel.findOne({ name: req.body.author })
+    const author = await AuthorModel.findOne({ _id: req.body.author })
     if(!author) {
       return res.status(404).json({ error: 'Author not found' })  
     } 
     authorId = author._id.toString()
   }
+  
+  let categoriesIds: string[] = []
+  if (existingBook.categories) {
+    categoriesIds = existingBook.categories.map(category => category.toString())
+  }
 
-  let categoriesIds: string[] | null = null
-  if (req.body.category) { 
-    const categories = await CategoryModel.find({ name: { $in: req.body.category } })
+  if (req.body.categories) { 
+    const categories = await CategoryModel.find({ _id: { $in: req.body.categories } })
     if(categories.length === 0) {
       return res.status(404).json({ error: 'Category not found' })  
     }
-    categoriesIds = categories.map(category => category._id.toString()) as string[]
+    const newCategoriesIds = categories.map(category => category._id.toString()) as string[]
+    categoriesIds = categoriesIds.concat(newCategoriesIds) 
   }
 
   if (existingBook !== null) {

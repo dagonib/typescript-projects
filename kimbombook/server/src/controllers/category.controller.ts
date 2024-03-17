@@ -20,6 +20,11 @@ export async function getCategoryController (req: Request, res: Response) {
   res.json(category)
 }
 
+export async function getNameCategoryByIdController (req: Request, res: Response) {
+  const category = await CategoryModel.findById(req.params.id)
+  res.json(category?.name)
+}
+
 export async function deleteCategoryController (req: Request, res: Response) {
   const category = await CategoryModel.findByIdAndDelete(req.params.id)
   res.json(category)

@@ -5,7 +5,6 @@ import { type ELanguage } from '../enums'
 import { useAuthStore } from '../store/auth.store'
 
 export async function createBook (title: string, author: string, description: string, imageLink: string, categories: string, language: ELanguage, link: string, available: boolean): Promise<Book> {
-  console.log('api create-books', title, author, description, imageLink, categories, language, link, available)
   const response = await fetch(`${API_URL}/books`, {
     method: 'POST',
     body: JSON.stringify({
@@ -61,8 +60,22 @@ export async function getBookById (bookId: string): Promise<Book> {
   return data
 }
 
-export async function getBooks (): Promise<ListOfBooks> {
-  const response = await axios.get(`${API_URL}/books`)
+export async function getBooks (column: string | null = null, order: string | null = null, searchValue: string | null = null): Promise<ListOfBooks> {
+  let url = `${API_URL}/books`
+  const params = new URLSearchParams()
+
+  if (column !== null && order !== null) {
+    params.append('column', column)
+    params.append('order', order)
+  }
+
+  if (searchValue !== null) {
+    params.append('searchValue', searchValue)
+  }
+
+  url += `?${params.toString()}`
+
+  const response = await axios.get(url)
   const data = await response.data
   return data
 }

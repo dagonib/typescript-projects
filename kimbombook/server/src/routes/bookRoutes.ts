@@ -4,7 +4,7 @@ import {
   deleteBookController, 
   getBooksController,
   getByIdBookController,
-  updateBookController
+  updateBookController,
 } from '../controllers/bookControllers'
 import requireAuth from '../middlewares/requireAuth'
 

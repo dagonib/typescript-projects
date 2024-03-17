@@ -7,7 +7,7 @@ export interface Book {
   title: string
   description: string
   imageLink: string
-  categories: string
+  categories: string[]
   language: ELanguage
   link: string
   available: boolean

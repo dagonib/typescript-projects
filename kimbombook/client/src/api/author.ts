@@ -21,7 +21,6 @@ export async function createAuthor (name: string, imageLink: string): Promise<Au
 }
 
 export async function getAuthorById (id: string): Promise<Author> {
-  console.log('Getting author by id:', id)
   const response = await axios.get(`${API_URL}/authors/${id}`)
   return response.data
 }

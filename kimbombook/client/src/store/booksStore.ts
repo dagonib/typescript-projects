@@ -6,7 +6,7 @@ import { type ECategory, type ELanguage } from '../enums'
 
 interface State {
   books: ListOfBooks
-  fetchBooksStore: () => Promise<void>
+  fetchBooksStore: (column: string | null, order: string | null, searchValue: string | null) => Promise<void>
   deleteBookStore: (bookId: string) => void
   createBookStore: (
     title: string,
@@ -36,9 +36,9 @@ export const useBookStore = create<State>((set) => {
   return {
     books: [],
 
-    fetchBooksStore: async () => {
+    fetchBooksStore: async (column: string | null, order: string | null, searchValue: string | null) => {
       try {
-        const data = await getBooks()
+        const data = await getBooks(column, order, searchValue)
         set({ books: data })
       } catch (error) {
         console.error('Error fetching books:', error)
