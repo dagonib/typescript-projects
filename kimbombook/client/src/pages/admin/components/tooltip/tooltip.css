@@ -1,0 +1,21 @@
+.tooltip-container {
+  position: absolute;
+  /* transform: translate(0.3s, 0%); */
+  background-color: #373737;
+  color: white;
+  width: 310px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip-container p {
+  margin: 0;
+  padding: 5px;
+  font-size: 10px;
+  overflow: visible;
+  white-space: wrap;
+  text-align: left;
+}
+

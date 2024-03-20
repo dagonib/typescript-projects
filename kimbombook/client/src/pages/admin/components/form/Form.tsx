@@ -10,7 +10,7 @@ import useFetchAuthorsFromStore from '../../../../hooks/useFetchAuthorsFromStore
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const createBookStore = useBookStore(state => state.createBookStore)
-  const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
+  // const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
   const updateBookStore = useBookStore(state => state.updateBookStore)
 
   const listOFCategories = useFetchCategoriesFromStore()
@@ -51,7 +51,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
         setTimeout(() => {
           setShowConfirmation(false)
         }, 3000)
-        navigate('/admin/dashboard')
+        navigate('/admin/books')
       } else {
         console.log('Creating book', title, author, description, imageLink, categories, language, link, available)
         await createBookStore(title, author, description, imageLink, categories, language, link, available)
@@ -63,10 +63,10 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
         setLanguage(ELanguage.Castellano)
         setLink('')
         setAvailable(false)
-        await fetchBooksStore()
+        // await fetchBooksStore()
         setShowConfirmation(true)
         setTimeout(() => { setShowConfirmation(false) }, 3000)
-        navigate('/admin/dashboard')
+        navigate('/admin/books')
       }
     } catch (error) {
       console.log('Error creating book: ', error)

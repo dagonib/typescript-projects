@@ -8,7 +8,6 @@ const BooksPage: React.FC = () => {
         <h1>Books</h1>
       </div>
       <BooksTable />
-      {/* <DataTable data={books} /> */}
     </div>
   )
 }
