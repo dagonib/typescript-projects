@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 import { type Book, type ListOfBooks } from '../types'
 import { getBooks, createBook, deleteBook, getBookById, updateBook } from '../api/book'
-import { type ECategory, type ELanguage } from '../enums'
+import { type ELanguage } from '../enums'
 
 interface State {
   books: ListOfBooks
@@ -13,7 +13,7 @@ interface State {
     author: string,
     description: string,
     imageLink: string,
-    category: string,
+    categories: string[],
     language: ELanguage,
     link: string,
     available: boolean
@@ -25,7 +25,7 @@ interface State {
     author: string,
     description: string,
     imageLink: string,
-    category: string,
+    categories: string[],
     language: ELanguage,
     link: string,
     available: boolean
@@ -50,19 +50,18 @@ export const useBookStore = create<State>((set) => {
       author: string,
       description: string,
       imageLink: string,
-      category: string,
+      categories: string[],
       language: ELanguage,
       link: string,
       available: boolean
     ): Promise<Book | undefined> => {
       try {
-        console.log('Creating book', title, author, description, imageLink, category, language, link, available)
         const createdBook = await createBook(
           title,
           author,
           description,
           imageLink,
-          category,
+          categories,
           language,
           link,
           available)
@@ -96,7 +95,7 @@ export const useBookStore = create<State>((set) => {
       author: string,
       description: string,
       imageLink: string,
-      category: string,
+      categories: string[],
       language: string,
       link: string,
       available: boolean
@@ -108,7 +107,7 @@ export const useBookStore = create<State>((set) => {
           author,
           description,
           imageLink,
-          category as ECategory, // Convert category to ECategory type
+          categories,
           language as ELanguage,
           link,
           available

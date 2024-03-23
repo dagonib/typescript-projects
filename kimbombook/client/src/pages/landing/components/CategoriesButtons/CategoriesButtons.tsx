@@ -2,7 +2,7 @@ import './categoriesButtons.css'
 
 import { useContext, useId } from 'react'
 import { ECategory } from '../../../../enums'
-import { FilterContext } from '../../../../context/FilterContex'
+import { FilterContext } from '../../../../context/filterContext/FilterContex'
 
 const CategoriesButtons: React.FC = () => {
   const categoryFilterId = useId()

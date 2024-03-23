@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useBookStore } from '../../../store/booksStore'
+import { useBookStore } from '../../../../store/booksStore'
 import { useParams } from 'react-router-dom'
 import Form from '../components/form/Form'
 import './editbookpage.css'
-import { type Book } from '../../../types'
+import { type Book } from '../../../../types'
 
 const EditBookPage: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>()

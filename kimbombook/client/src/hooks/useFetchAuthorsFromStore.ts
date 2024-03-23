@@ -16,7 +16,9 @@ const useFetchAuthorsFromStore = (): ListOfAuthors => {
     fetchAuthorsFromStore().catch(error => { console.error('Error fetching authors: ', error) })
   }, [])
 
-  return useAuthorStore(state => state.authors)
+  let authors = useAuthorStore(state => state.authors)
+  authors = authors.sort((a, b) => a.name.localeCompare(b.name))
+  return authors
 }
 
 export default useFetchAuthorsFromStore

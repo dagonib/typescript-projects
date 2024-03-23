@@ -1,6 +1,6 @@
 import './librariapage.css'
 import Books from '../components/Books/Books'
-import { FilterProvider } from '../../../context/FilterProvider'
+import { FilterProvider } from '../../../context/filterContext/FilterProvider'
 import CategoriesButtons from '../components/CategoriesButtons/CategoriesButtons'
 
 const LibrariaPage: React.FC = () => {

@@ -1,7 +1,7 @@
 import { useContext, useId } from 'react'
 import { ECategory } from '../../../../enums'
 import './filters.css'
-import { FilterContext } from '../../../../context/FilterContex'
+import { FilterContext } from '../../../../context/filterContext/FilterContex'
 
 const Filters: React.FC = () => {
   const categoryFilterId = useId()

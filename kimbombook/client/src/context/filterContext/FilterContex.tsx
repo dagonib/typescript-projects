@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import type { FilterState } from '../interfaces/interfaces'
-import { ECategory } from '../enums'
+import type { FilterState } from '../../interfaces/interfaces'
+import { ECategory } from '../../enums'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type FilterContextProps = {

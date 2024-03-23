@@ -2,7 +2,7 @@ import Header from './Header/Header'
 import FeaturesBooks from './FeaturesBooks/FeaturesBooks'
 import RecommendedCollections from './RecommendedCollections/RecommendedCollections'
 import Quote from './Quote/Quote'
-import { FilterProvider } from '../../../context/FilterProvider'
+import { FilterProvider } from '../../../context/filterContext/FilterProvider'
 import LatestArticles from '../components/LatestArticles/LatestArticles'
 
 const HomePage: React.FC = () => {

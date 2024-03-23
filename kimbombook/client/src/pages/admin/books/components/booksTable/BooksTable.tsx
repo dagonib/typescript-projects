@@ -3,15 +3,15 @@ import './booksTable.css'
 import {
   type Book,
   type ListOfBooks
-} from '../../../../types'
-import { getAuthorById } from '../../../../api/author'
-import { getCategoryById } from '../../../../api/category'
+} from '../../../../../types'
+import { getAuthorById } from '../../../../../api/author'
+import { getCategoryById } from '../../../../../api/category'
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi'
-import { useBookStore } from '../../../../store/booksStore'
+import { useBookStore } from '../../../../../store/booksStore'
 import { FaSearch } from 'react-icons/fa'
 import { MdEditSquare, MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import Tooltip from '../../components/tooltip/Tooltip'
+import Tooltip from '../../../components/tooltip/Tooltip'
 
 interface Sorting {
   column: string

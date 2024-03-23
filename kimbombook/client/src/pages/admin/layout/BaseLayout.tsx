@@ -1,6 +1,6 @@
 import './baseLayout.css'
 import Header from '../components/header/Header'
-import NewSideBar from '../components/asideBar/asideBar'
+import AsideBar from '../components/asideBar/asideBar'
 import { Outlet } from 'react-router-dom'
 import Footer from '../components/footer/Footer'
 
@@ -11,7 +11,7 @@ const BaseLayout: React.FC = () => {
       <Header />
       {/* main-container */}
       <div className="baselayout__wrapper" id="main">
-        <NewSideBar />
+        <AsideBar />
         <Outlet/>
       </div>
       <Footer />

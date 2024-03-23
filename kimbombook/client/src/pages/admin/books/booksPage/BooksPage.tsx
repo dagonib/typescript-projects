@@ -1,5 +1,5 @@
 import './booksPage.css'
-import BooksTable from '../booksTable/BooksTable'
+import BooksTable from '../components/booksTable/BooksTable'
 
 const BooksPage: React.FC = () => {
   return (

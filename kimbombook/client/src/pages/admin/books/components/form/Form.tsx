@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react'
 import './form.css'
-// import { useCategoryStore } from '../../../../store/category.store'
-import { useBookStore } from '../../../../store/booksStore'
-import { ELanguage } from '../../../../enums'
-import { type Book } from '../../../../types'
+import { useBookStore } from '../../../../../store/booksStore'
+import { ELanguage } from '../../../../../enums'
+import { type Book } from '../../../../../types'
 import { useNavigate } from 'react-router-dom'
-import useFetchCategoriesFromStore from '../../../../hooks/useFetchCategoriesFromStore'
-import useFetchAuthorsFromStore from '../../../../hooks/useFetchAuthorsFromStore'
+import useFetchAuthorsFromStore from '../../../../../hooks/useFetchAuthorsFromStore'
+import { SelectCategories } from '../selectCategories/SelectCategories'
+import useFetchCategoriesFromStore from '../../../../../hooks/useFetchCategoriesFromStore'
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
+  const navigate = useNavigate()
   const createBookStore = useBookStore(state => state.createBookStore)
-  // const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
   const updateBookStore = useBookStore(state => state.updateBookStore)
 
-  const listOFCategories = useFetchCategoriesFromStore()
+  const listOfCategories = useFetchCategoriesFromStore()
   const authors = useFetchAuthorsFromStore()
 
-  const navigate = useNavigate()
+  const [value, setValue] = useState<typeof listOfCategories[0] | undefined>(listOfCategories[0])
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [description, setDescription] = useState('')
   const [imageLink, setImageLink] = useState('')
-  const [categories, setCategories] = useState('')
+  const [categories, setCategories] = useState<string[]>([])
   const [language, setLanguage] = useState<ELanguage>(ELanguage.Castellano)
   const [link, setLink] = useState('')
   const [available, setAvailable] = useState(false)
@@ -53,17 +53,15 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
         }, 3000)
         navigate('/admin/books')
       } else {
-        console.log('Creating book', title, author, description, imageLink, categories, language, link, available)
         await createBookStore(title, author, description, imageLink, categories, language, link, available)
         setTitle('')
         setAuthor('')
         setDescription('')
         setImageLink('')
-        setCategories('')
+        setCategories([])
         setLanguage(ELanguage.Castellano)
         setLink('')
         setAvailable(false)
-        // await fetchBooksStore()
         setShowConfirmation(true)
         setTimeout(() => { setShowConfirmation(false) }, 3000)
         navigate('/admin/books')
@@ -78,6 +76,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     <form onSubmit={handleCreateBook} className='form'>
       <div className='form__content'>
         <div className='form__content--left'>
+
           {/* Title */}
           <div className='form__input'>
             <label htmlFor="book-title">Título</label>
@@ -135,14 +134,17 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
         </div>
 
         <div className='form__content--right'>
-          {/* Category */}
-          <div className='form__input'>
-            <label htmlFor="book-category">Categoría</label>
+          {/* Categories */}
+          {/* <div className='form__input'>
+            <label htmlFor="book-category">Categorías</label>
             <select
               id="book-category"
               value={categories}
+              multiple
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                setCategories(e.target.value)
+                const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value)
+                console.log(selectedOptions)
+                setCategories(selectedOptions)
               }}
             >
               <option value="">Selecciona un categoría</option>
@@ -152,7 +154,13 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
+
+          <SelectCategories
+            value={value}
+            options={listOfCategories}
+            onChange={o => { console.log(o) }}
+          />
 
           {/* Language */}
           <div className='form__input'>

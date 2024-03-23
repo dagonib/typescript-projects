@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { ECategory } from '../enums'
-import type { FilterState } from '../interfaces/interfaces'
+import { ECategory } from '../../enums'
+import type { FilterState } from '../../interfaces/interfaces'
 import { FilterContext } from './FilterContex'
 
 interface FilterProviderProps {

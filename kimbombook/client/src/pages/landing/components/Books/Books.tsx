@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { type ListOfBooks } from '../../../../types'
-import { FilterContext } from '../../../../context/FilterContex'
+import { FilterContext } from '../../../../context/filterContext/FilterContex'
 import useFetchBooksFromStore from '../../../../hooks/useFetchBooksFromStore'
 import useFilters from '../../../../hooks/useFilters'
 import Book from '../Book/Book'
