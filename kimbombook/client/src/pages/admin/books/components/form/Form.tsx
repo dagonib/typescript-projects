@@ -5,7 +5,7 @@ import { ELanguage } from '../../../../../enums'
 import { type Book } from '../../../../../types'
 import { useNavigate } from 'react-router-dom'
 import useFetchAuthorsFromStore from '../../../../../hooks/useFetchAuthorsFromStore'
-import { SelectCategories } from '../selectCategories/SelectCategories'
+import { SelectCategories, type SelectCategoryOption } from '../selectCategories/SelectCategories'
 import useFetchCategoriesFromStore from '../../../../../hooks/useFetchCategoriesFromStore'
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
@@ -16,7 +16,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const listOfCategories = useFetchCategoriesFromStore()
   const authors = useFetchAuthorsFromStore()
 
-  const [value, setValue] = useState<typeof listOfCategories[0] | undefined>(listOfCategories[0])
+  const [value, setValue] = useState<SelectCategoryOption[]>([])
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -69,6 +69,12 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     } catch (error) {
       console.log('Error creating book: ', error)
     }
+  }
+
+  const handleSelectChange = (o: SelectCategoryOption[]): void => {
+    setValue(o)
+    const selectedIds = o.map((category) => category._id)
+    setCategories(selectedIds)
   }
 
   return (
@@ -135,31 +141,11 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
 
         <div className='form__content--right'>
           {/* Categories */}
-          {/* <div className='form__input'>
-            <label htmlFor="book-category">Categorías</label>
-            <select
-              id="book-category"
-              value={categories}
-              multiple
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value)
-                console.log(selectedOptions)
-                setCategories(selectedOptions)
-              }}
-            >
-              <option value="">Selecciona un categoría</option>
-              {listOFCategories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div> */}
-
           <SelectCategories
+            multiple
             value={value}
             options={listOfCategories}
-            onChange={o => { console.log(o) }}
+            onChange={handleSelectChange}
           />
 
           {/* Language */}
