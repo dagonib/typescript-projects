@@ -17,7 +17,6 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const authors = useFetchAuthorsFromStore()
 
   const [value, setValue] = useState<SelectCategoryOption[]>([])
-
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [description, setDescription] = useState('')
@@ -39,6 +38,8 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
       setLanguage(book.language)
       setLink(book.link)
       setAvailable(book.available)
+      const selectedCategories = listOfCategories.filter((category) => book.categories.includes(category._id))
+      setValue(selectedCategories)
     }
   }, [book])
 
@@ -46,6 +47,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     e.preventDefault()
     try {
       if (book !== null && book !== undefined) {
+        console.log('Updating book', categories)
         await updateBookStore(book._id, title, author, description, imageLink, categories, language, link, available)
         setShowConfirmation(true)
         setTimeout(() => {
@@ -73,7 +75,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
 
   const handleSelectChange = (o: SelectCategoryOption[]): void => {
     setValue(o)
-    const selectedIds = o.map((category) => category._id)
+    const selectedIds = o.map(category => category._id)
     setCategories(selectedIds)
   }
 
@@ -140,13 +142,17 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
         </div>
 
         <div className='form__content--right'>
-          {/* Categories */}
-          <SelectCategories
-            multiple
-            value={value}
-            options={listOfCategories}
-            onChange={handleSelectChange}
-          />
+
+        {/* Categories */}
+        <div className='form__input'>
+          <label htmlFor="book-categories">Categorias</label>
+            <SelectCategories
+              multiple
+              value={value}
+              options={listOfCategories}
+              onChange={handleSelectChange}
+            />
+        </div>
 
           {/* Language */}
           <div className='form__input'>
@@ -197,7 +203,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
           </div>
         </div>
       </div>
-      <button>{book !== null && book !== undefined ? 'Actualizar' : 'Crear Libro'}</button>
+      <button className='btn'>{book !== null && book !== undefined ? 'Actualizar' : 'Crear Libro'}</button>
       {showConfirmation && <p className='confirmation'>Libro creado correctamente.</p>}
     </form>
   )

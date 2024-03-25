@@ -105,7 +105,7 @@ export async function updateBookController (req: Request, res: Response) {
       return res.status(404).json({ error: 'Category not found' })  
     }
     const newCategoriesIds = categories.map(category => category._id.toString()) as string[]
-    categoriesIds = categoriesIds.concat(newCategoriesIds) 
+    categoriesIds = newCategoriesIds 
   }
 
   if (existingBook !== null) {

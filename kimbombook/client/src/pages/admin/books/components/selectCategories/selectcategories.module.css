@@ -1,6 +1,5 @@
 .container {
  position: relative;
- width: 20em;
  min-height: 1.5em;
  border: .05em solid #777;
  display: flex;
@@ -12,7 +11,7 @@
 }
 
 .container:focus {
-  border-color: hsl(200, 100%, 50%);
+  border-color: var(--color-black-Ex)
 }
 
 .value {
@@ -73,6 +72,9 @@
 .option {
   padding: .25em .5em;
   cursor: pointer;
+  font-family: var(--font-family-jakarta);
+  color: var(--color-black-Ex);
+  font-size: 0.8rem;
 }
 
 .option.selected {

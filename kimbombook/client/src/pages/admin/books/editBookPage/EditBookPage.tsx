@@ -26,8 +26,8 @@ const EditBookPage: React.FC = () => {
   }, [])
 
   return (
-    <div className='createbook'>
-      <h3>Editar Libro</h3>
+    <div className='createbook baselayout__content'>
+      <h1>Edit Book</h1>
       { book !== null && <Form book={book} /> }
     </div>
   )

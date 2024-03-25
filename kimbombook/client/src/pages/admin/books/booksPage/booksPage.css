@@ -1,10 +1,3 @@
-.admin-books__info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
 .admin-books__info--button {
   padding: 5px;
   display: flex;

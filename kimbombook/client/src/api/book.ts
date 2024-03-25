@@ -25,7 +25,7 @@ export async function createBook (title: string, author: string, description: st
 }
 
 export async function updateBook (bookId: string, title: string, author: string, description: string, imageLink: string, categories: string[], language: ELanguage, link: string, available: boolean): Promise<Book> {
-  console.log(available)
+  console.log('books', categories)
   const response = await axios.put(`${API_URL}/books/${bookId}`, {
     title,
     author,
