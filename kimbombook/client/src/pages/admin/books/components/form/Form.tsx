@@ -47,7 +47,6 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     e.preventDefault()
     try {
       if (book !== null && book !== undefined) {
-        console.log('Updating book', categories)
         await updateBookStore(book._id, title, author, description, imageLink, categories, language, link, available)
         setShowConfirmation(true)
         setTimeout(() => {

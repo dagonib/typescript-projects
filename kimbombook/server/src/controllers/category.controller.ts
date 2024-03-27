@@ -10,9 +10,31 @@ export async function createCategoryController (req: Request, res: Response) {
   res.json(createdCategory)
 }
 
-export async function getCategoriesController (_req: Request, res: Response) {
-  const categories = await CategoryModel.find()
-  res.json(categories)
+export async function getCategoriesController (req: Request, res: Response) {
+  const { column, order, searchValue } = req.query
+
+  try {
+    let query = CategoryModel.find()
+    const sortOrder = {}
+
+    if (column && order) {
+      sortOrder[column as string] = order === 'asc' ? 1 : -1  
+    }
+
+    if (searchValue) {
+      const regex = new RegExp(searchValue as string, 'i')
+      query = query.or([{ name: regex }])
+    }
+
+    if (Object.keys(sortOrder).length > 0) {
+      query = query.sort(sortOrder)
+    }
+
+    const categories = await query.exec()
+    res.json(categories)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
 }
 
 export async function getCategoryController (req: Request, res: Response) {

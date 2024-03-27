@@ -9,6 +9,10 @@ import CreateBookPage from '../books/createBookPage/CreateBookPage'
 import EditBookPage from '../books/editBookPage/EditBookPage'
 import BooksPage from '../books/booksPage/BooksPage'
 import BaseLayout from '../layout/BaseLayout'
+import CategoriesPage from '../categories/categoriesPage/CategoriesPage'
+import AuthorsPage from '../authors/authorsPage/AuthorsPage'
+import CreateCategoryPage from '../categories/createCategoryPage/CreateCategoryPage'
+import EditCategoryPage from '../categories/editCategoryPage/EditCategoryPage'
 
 const AdminPage: React.FC = () => {
   const isAuth = useAuthStore(state => state.isAuth)
@@ -25,6 +29,7 @@ const AdminPage: React.FC = () => {
                 </ProtectedRoute>
               }
             />
+            {/* ********* BOOKS ************/}
             <Route
               path='books'
               element= {
@@ -49,6 +54,43 @@ const AdminPage: React.FC = () => {
                 </ProtectedRoute>
               }
             />
+
+            {/* ********* CATEGORIES ************/}
+            <Route
+              path='categories'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <CategoriesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='create-category'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <CreateCategoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='edit-category/:categoryId'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <EditCategoryPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* ********* AUTHORS ************/}
+            <Route
+              path='authors'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <AuthorsPage />
+                </ProtectedRoute>
+              }
+            />
+            {/* ********* PROFILE ************/}
             <Route
               path='profile'
               element= {

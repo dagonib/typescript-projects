@@ -1,0 +1,164 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table thead tr {
+  background-color: #9bcae2;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f1f2f2;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.table-header-cell {
+  border: 1px solid #dddddd;
+  color: #484848;
+  font-size: 14px;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+.table-body-cell {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+  width: fit-content;
+}
+
+.table-body-cell img {
+  width: 50px;
+  object-fit: cover;
+  text-align: center;
+}
+
+.table-body-cell a {
+  padding: 5px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.table-body-cell a:hover {
+  color: #9bcae2;
+}
+
+.table-body-cell svg {
+  font-size: 16px;
+}
+
+/* ImageLink */
+.table-body-cell:first-child {
+  text-align: center;
+  width: 60px;
+}
+
+/* Title */
+.table-body-cell:nth-child(2) {
+  width: 300px;
+}
+
+/* Author */
+.table-body-cell:nth-child(3) {
+  width: 200px;
+}
+
+/* Description */
+.table-body-cell:nth-child(4) {
+  width: 200px;
+}
+
+.table-body-cell:nth-child(4) span {
+  display: block;
+  text-align: center;
+  max-width: 150px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.table-body-cell__description__short {
+  position: relative;
+}
+
+/* Available */
+.table-body-cell:nth-child(5) {
+  text-align: center;
+  width: 60px;
+}
+
+/* Categories */
+.table-body-cell:nth-child(6) li {
+  font-size: 12px;
+  line-height: 1.4;
+  list-style-type: disc;
+}
+.table-body-cell:nth-child(6) li::marker {
+  color: #9bcae2;
+}
+
+/* Link */
+.table-body-cell:nth-child(7) {
+  text-align: center;
+  width: 60px;
+}
+
+/* Actions */
+.table-body-cell:last-child {
+  text-align: center;
+  width: 60px;
+}
+
+/************ SEARCHBAR **********/
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar form {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.search-bar input {
+  border: transparent;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  color: var(--color-dark);
+  width: 80px;
+  transition: all 0.3s;
+}
+
+.search-bar input:focus {
+  width: 100%;
+}
+
+.search-bar input:focus-visible {
+  border: transparent;
+}
+
+.search-bar button {
+  border: transparent;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #dddddd;
+}

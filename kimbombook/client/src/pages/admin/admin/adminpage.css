@@ -17,7 +17,6 @@
   display: inline-block;
   width: fit-content;
   color: var(--color-black);
-
   font-family: var(--font-family-jakarta);
   text-transform: uppercase;
   font-weight: 400;

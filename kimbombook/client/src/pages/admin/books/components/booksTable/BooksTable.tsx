@@ -30,7 +30,11 @@ const HeaderCell: React.FC<HeaderCellProps> = ({ column, sorting, sortTable }: {
   const futureSortingOrder = isDescSorting ? 'asc' : 'desc'
 
   return (
-    <th key={column} className='books-table-header-cell' onClick={ () => sortTable({ column, order: futureSortingOrder }) }>
+    <th
+      key={column}
+      className='books-table-header-cell'
+      onClick={ () => sortTable({ column, order: futureSortingOrder })}
+    >
       <span>{column}</span>
       { isDescSorting && <BiSolidDownArrow /> }
       { isAscSorting && <BiSolidUpArrow /> }
@@ -58,6 +62,7 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const deleteBookStore = useBookStore(state => state.deleteBookStore)
 
+  // Mostrar descripción completa en tooltip
   const handleMouseEnter = (text: string, event: React.MouseEvent<HTMLElement>): void => {
     setShowFullText(true)
     setPopoverText(text)
@@ -84,6 +89,7 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
     }
   }
 
+  // Crear tabla de authors
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const fetchAuthors = async () => {
@@ -104,6 +110,7 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
     void fetchAuthors() // Added 'await' keyword here
   }, [entries])
 
+  // Crear tabla de categories
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const fetchCategories = async () => {
@@ -233,8 +240,15 @@ const BooksTable: React.FC = () => {
       </div>
 
       <table className='books-table'>
-        <Header columns={columns} sorting={sorting as Sorting} sortTable={sortTable} />
-        <Content entries={books} columns={columns} />
+        <Header
+          columns={columns}
+          sorting={sorting as Sorting}
+          sortTable={sortTable}
+        />
+        <Content
+          entries={books}
+          columns={columns}
+        />
       </table>
       <div>Pagination</div>
     </div>

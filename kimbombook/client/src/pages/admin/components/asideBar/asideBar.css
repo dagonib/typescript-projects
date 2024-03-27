@@ -13,7 +13,7 @@
 }
 
 .admin-new-sidebar__item {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .admin-new-sidebar__link {
@@ -21,15 +21,32 @@
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #5154f1;
+  color: var(--color-black-Ex);
   transition: 0.3s;
-  background: #f6f9ff;
   padding: 10px 5px;
   border-radius: 4px;
+  gap: 5px;
 }
 
-.admin-new-sidebar__link i {
-  font-size: 16px;
-  margin-right: 10px;
-  color: #5154f1;
+.admin-new-sidebar__link svg {
+  font-size: 20px;
+}
+
+.admin-new-sidebar__link span {
+  position: relative;
+}
+
+.admin-new-sidebar__link span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-black-Ex);
+  transition: all 0.3s ease;
+}
+
+.admin-new-sidebar__item:hover .admin-new-sidebar__link span::after {
+  width: 100%;
 }
