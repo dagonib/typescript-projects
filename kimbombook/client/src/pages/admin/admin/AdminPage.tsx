@@ -13,6 +13,8 @@ import CategoriesPage from '../categories/categoriesPage/CategoriesPage'
 import AuthorsPage from '../authors/authorsPage/AuthorsPage'
 import CreateCategoryPage from '../categories/createCategoryPage/CreateCategoryPage'
 import EditCategoryPage from '../categories/editCategoryPage/EditCategoryPage'
+import CreateAuthorPage from '../authors/createAuthorPage/CreateAuthorPage'
+import EditAuthorPage from '../authors/editAuthorPage/EditAuthorPage'
 
 const AdminPage: React.FC = () => {
   const isAuth = useAuthStore(state => state.isAuth)
@@ -87,6 +89,22 @@ const AdminPage: React.FC = () => {
               element= {
                 <ProtectedRoute isAllowed={isAuth}>
                   <AuthorsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='create-author'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <CreateAuthorPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='edit-author/:authorId'
+              element= {
+                <ProtectedRoute isAllowed={isAuth}>
+                  <EditAuthorPage />
                 </ProtectedRoute>
               }
             />

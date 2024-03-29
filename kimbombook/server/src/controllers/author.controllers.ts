@@ -10,9 +10,30 @@ export async function createAuthorController (req: Request, res: Response) {
   res.json(createdAuthor)
 }
 
-export async function getAuthorsController (_req: Request, res: Response) {
-  const authors = await AuthorModel.find()
-  res.json(authors)
+export async function getAuthorsController (req: Request, res: Response) {
+  const { column, order, searchValue } = req.query
+
+  try {
+    let query = AuthorModel.find()
+    const sortOrder = {}
+
+    if (column && order) {
+      sortOrder[column as string] = order === 'asc' ? 1 : -1
+    }
+
+    if (searchValue) {
+      const regex = new RegExp(searchValue as string, 'i')
+      query = query.or([{ name: regex }])
+    }
+
+    if (Object.keys(sortOrder).length > 0) {
+      query = query.sort(sortOrder)
+    }
+    const authors = await query.exec()
+    res.json(authors)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
 }
 
 export async function getAuthorController (req: Request, res: Response) {

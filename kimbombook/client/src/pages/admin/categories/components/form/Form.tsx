@@ -71,7 +71,14 @@ const Form: React.FC<{ category?: Category }> = ({ category }) => {
         </div>
       </div>
 
-      <button className='btn'>{category !== null && category !== undefined ? 'Actualizar' : 'Crear Categoría'}</button>
+      <button className='btn'>
+        {
+          category !== null &&
+            category !== undefined
+            ? 'Actualizar'
+            : 'Crear Categoría'
+        }</button>
+
       {showConfirmation && <p className='confirmation'>Libro creado correctamente.</p>}
     </form>
   )

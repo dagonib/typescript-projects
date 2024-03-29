@@ -1,0 +1,113 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table thead tr {
+  background-color: #9bcae2;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f1f2f2;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.headerCell {
+  border: 1px solid #dddddd;
+  color: #484848;
+  font-size: 14px;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+.bodyCell {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+  width: fit-content;
+}
+
+.bodyCell img {
+  width: 50px;
+  object-fit: cover;
+  text-align: center;
+}
+
+.bodyCell a {
+  padding: 5px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.bodyCell a:hover {
+  color: #9bcae2;
+}
+
+.bodyCell svg {
+  font-size: 16px;
+}
+
+/* Name */
+.bodyCell:nth-child(1) {
+  width: 75px;
+  text-align: center;
+}
+
+/* Actions */
+.bodyCell:last-child {
+  text-align: center;
+  width: 60px;
+}
+
+/************ SEARCHBAR **********/
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar form {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.searchBar input {
+  border: transparent;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  color: var(--color-dark);
+  width: 80px;
+  transition: all 0.3s;
+}
+
+.searchBar input:focus {
+  width: 100%;
+}
+
+.searchBar input:focus-visible {
+  border: transparent;
+}
+
+.searchBar button {
+  border: transparent;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #dddddd;
+}
