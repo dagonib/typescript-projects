@@ -1,35 +1,13 @@
 import './recommendedCollections.css'
-
 import TitleTypeOne from '../../UI/TitleTypeOne/TitleTypeOne'
-import { ECategory } from '../../../../enums'
-import { useContext, useEffect } from 'react'
-import { FilterContext } from '../../../../context/filterContext/FilterContex'
-import useFilters from '../../../../hooks/useFilters'
-import useFetchBooksFromStore from '../../../../hooks/useFetchBooksFromStore'
-import { type ListOfBooks } from '../../../../types'
 import { Link } from 'react-router-dom'
 import { BsArrowReturnRight } from 'react-icons/bs'
+import useBookFilterByCategory from '../../../../hooks/books/useBookFilterByCategory'
+import useGetAuthorsNames from '../../../../hooks/author/useGetAuthorsNames'
 
 const RecommendedCollections: React.FC = () => {
-  const books: ListOfBooks = useFetchBooksFromStore()
-  const { filterState, setFilterState } = useContext(FilterContext)
-  const { setFilters, filterBooks } = useFilters()
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleFilterChange = (category: ECategory) => {
-    const selectedCategory = category as ECategory
-    setFilterState({ ...filterState, category: selectedCategory })
-  }
-
-  useEffect(() => {
-    setFilters(filterState)
-  }, [filterState, setFilters])
-
-  useEffect(() => {
-    setFilters({ ...filterState, category: ECategory.Historica })
-  }, [])
-
-  const filteredBooks = filterBooks(books)
+  const { filteredBooks, idCategory, setIdCategory } = useBookFilterByCategory('6606d5ae23ffd43602854313')
+  const authorsName = useGetAuthorsNames(filteredBooks)
 
   return (
     <section className='recommended-collections'>
@@ -39,28 +17,16 @@ const RecommendedCollections: React.FC = () => {
         {/* Filter Tabs Buttons */}
         <div className="recommended-collections__filter-buttons">
           <button
-            className={filterState.category === ECategory.Historica ? 'active' : ''}
-            onClick={ () => { handleFilterChange(ECategory.Historica) } }
+            className={idCategory === '6606d5ae23ffd43602854313' ? 'active' : ''}
+            onClick={ () => { setIdCategory('6606d5ae23ffd43602854313') } }
           >
-            Novela Histórica
+            Generación Perdida
           </button>
           <button
-            className={filterState.category === ECategory.Tremendismo ? 'active' : ''}
-            onClick={ () => { handleFilterChange(ECategory.Tremendismo) } }
+            className={idCategory === '65f579d99582d8f00c629b16' ? 'active' : ''}
+            onClick={ () => { setIdCategory('65f579d99582d8f00c629b16') } }
           >
             Tremendismo y Existencialismo
-          </button>
-          <button
-            className={filterState.category === ECategory.Sesenta ? 'active' : ''}
-            onClick={ () => { handleFilterChange(ECategory.Sesenta) } }
-          >
-            Novela Años Sesenta
-          </button>
-          <button
-            className={filterState.category === ECategory.GeneraciónX ? 'active' : ''}
-            onClick={ () => { handleFilterChange(ECategory.GeneraciónX) } }
-          >
-            Generación X
           </button>
         </div>
 
@@ -75,7 +41,7 @@ const RecommendedCollections: React.FC = () => {
                   </div>
                   <div className="recommended-collections__gallery-item__info">
                     <h4>{title}</h4>
-                    <div><small>{author}</small></div>
+                    <div><small>{authorsName[author]}</small></div>
                   </div>
                 </div>
               )

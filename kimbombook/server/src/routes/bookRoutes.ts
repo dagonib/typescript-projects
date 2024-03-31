@@ -5,6 +5,7 @@ import {
   getBooksController,
   getByIdBookController,
   updateBookController,
+  getBooksByCategoryController              
 } from '../controllers/bookControllers'
 import requireAuth from '../middlewares/requireAuth'
 
@@ -15,5 +16,6 @@ router.get('/', getBooksController)
 router.delete('/:bookId', requireAuth, deleteBookController)
 router.get('/:bookId', getByIdBookController)
 router.put('/:bookId', updateBookController)
+router.get('/category/:categoryId', getBooksByCategoryController)
 
 export default router

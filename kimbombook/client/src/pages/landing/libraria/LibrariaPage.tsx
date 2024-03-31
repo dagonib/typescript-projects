@@ -1,22 +1,15 @@
 import './librariapage.css'
-import Books from '../components/Books/Books'
-import { FilterProvider } from '../../../context/filterContext/FilterProvider'
-import CategoriesButtons from '../components/CategoriesButtons/CategoriesButtons'
 
 const LibrariaPage: React.FC = () => {
   return (
-    <FilterProvider>
-      <main className='libraria'>
-        <div className='libraria__sidebar'>
-          <CategoriesButtons />
-        </div>
+    <main className='libraria'>
+      <div className='libraria__sidebar'>
+      </div>
 
-        <div className='libraria__body'>
-          <h1>Catálogo</h1>
-          <Books />
-        </div>
-      </main>
-    </FilterProvider>
+      <div className='libraria__body'>
+        <h1>Catálogo</h1>
+      </div>
+    </main>
   )
 }
 

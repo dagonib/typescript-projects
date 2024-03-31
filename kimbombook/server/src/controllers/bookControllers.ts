@@ -123,3 +123,14 @@ export async function updateBookController (req: Request, res: Response) {
   res.json(updatedBook)
   return
 }
+
+export async function getBooksByCategoryController (req: Request, res: Response) {
+  try {
+    const categoryId = req.params.categoryId
+
+    const books = await BookModel.find({ categories: categoryId })
+    res.json(books)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
+}

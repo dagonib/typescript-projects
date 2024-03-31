@@ -78,3 +78,9 @@ export async function getBooks (column: string | null = null, order: string | nu
   const data = await response.data
   return data
 }
+
+export async function getBooksByCategory (categoryId: string): Promise<ListOfBooks> {
+  const response = await axios.get(`${API_URL}/books/category/${categoryId}`)
+  const data = await response.data
+  return data
+}

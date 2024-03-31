@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './booksTable.css'
 import {
   type Book,
   type ListOfBooks
 } from '../../../../../types'
-import { getAuthorById } from '../../../../../api/author'
-import { getCategoryById } from '../../../../../api/category'
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi'
-import { useBookStore } from '../../../../../store/booksStore'
 import { FaSearch } from 'react-icons/fa'
 import { MdEditSquare, MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Tooltip from '../../../components/tooltip/Tooltip'
+import { deleteBook } from '../../../../../api/book'
+import useFetchBooks from '../../../../../hooks/books/useFetchBooks'
+import useGetAuthorsNames from '../../../../../hooks/author/useGetAuthorsNames'
+import useGetCategoriesNames from '../../../../../hooks/categories/useGetCategoriesNames'
 
 interface Sorting {
   column: string
@@ -55,12 +56,11 @@ const Header = ({ columns, sorting, sortTable }: { columns: string[], sorting: S
 }
 
 const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[] }): JSX.Element => {
-  const [authors, setAuthors] = useState<Record<string, string>>({})
-  const [categories, setCategories] = useState<Record<string, string>>({})
   const [showFullText, setShowFullText] = useState(false)
   const [popoverText, setPopoverText] = useState('')
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
-  const deleteBookStore = useBookStore(state => state.deleteBookStore)
+  const authorsName = useGetAuthorsNames(entries)
+  const categoriesName = useGetCategoriesNames(entries)
 
   // Mostrar descripción completa en tooltip
   const handleMouseEnter = (text: string, event: React.MouseEvent<HTMLElement>): void => {
@@ -79,8 +79,7 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
     try {
       const confirmed = window.confirm('Are you sure?')
       if (confirmed) {
-        // eslint-disable-next-line @typescript-eslint/await-thenable, @typescript-eslint/no-confusing-void-expression
-        await deleteBookStore(bookId)
+        await deleteBook(bookId)
       } else {
         console.log('Delete cancelled by user')
       }
@@ -88,54 +87,6 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
       console.log('Error deleting book: ', error)
     }
   }
-
-  // Crear tabla de authors
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const fetchAuthors = async () => {
-      const authorNames: Record<string, string> = {}
-      await Promise.all(
-        entries.map(async (entry: Book) => {
-          try {
-            const author = await getAuthorById(entry.author)
-            authorNames[entry.author] = author.name
-          } catch (error) {
-            authorNames[entry.author] = 'Unknown'
-          }
-        })
-      )
-      setAuthors(authorNames)
-    }
-
-    void fetchAuthors() // Added 'await' keyword here
-  }, [entries])
-
-  // Crear tabla de categories
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const fetchCategories = async () => {
-      const categoryNames: Record<string, string> = {}
-      await Promise.all(
-        entries.map(async (entry: Book) => {
-          try {
-            const categoriesListIds = entry.categories
-            if (Array.isArray(entry.categories)) {
-              await Promise.all(
-                categoriesListIds.map(async (categorieItemId: string) => {
-                  const category = await getCategoryById(categorieItemId)
-                  categoryNames[categorieItemId] = category.name
-                })
-              )
-            }
-          } catch (error) {
-            console.error('Error getting category by id:', error)
-          }
-        })
-      )
-      setCategories(categoryNames)
-    }
-    void fetchCategories()
-  }, [entries])
 
   return (
     <tbody>
@@ -147,10 +98,10 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
                 column === 'available'
                   ? ((entry[column as keyof Book] === false) ? 'Yes' : 'No')
                   : column === 'author'
-                    ? authors[entry.author]
+                    ? authorsName[entry.author]
                     : column === 'categories'
                       ? entry.categories?.map((category: string) => (
-                        <li key={category}>{ categories[category] }</li>
+                        <li key={category}>{ categoriesName[category] }</li>
                       ))
                       : column === 'imageLink'
                         ? <img src={entry.imageLink} alt={entry.title} />
@@ -210,19 +161,8 @@ const BooksTable: React.FC = () => {
   const columns = ['imageLink', 'title', 'author', 'description', 'available', 'categories', 'link', 'actions']
   const [searchValue, setSearchValue] = useState('')
 
-  const fetchBooksStore = useBookStore(state => state.fetchBooksStore)
-  const books = useBookStore(state => state.books)
-
-  useEffect(() => {
-    async function fetchBooksFromStore (): Promise<void> {
-      try {
-        await fetchBooksStore(sorting.column, sorting.order, searchValue)
-      } catch (error) {
-        console.error('Error fetching books from store: ', error)
-      }
-    }
-    fetchBooksFromStore().catch(error => { console.error('Error fetching books: ', error) })
-  }, [sorting, searchValue, fetchBooksStore, books])
+  const books = useFetchBooks(sorting.column, sorting.order, searchValue)
+  console.log('Books:', books)
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)

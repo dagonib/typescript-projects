@@ -1,12 +1,18 @@
-import { useEffect, useState } from 'react'
+import {
+  // useEffect,
+  useState
+} from 'react'
 import { type Author, type ListOfAuthors } from '../../../../../types'
 import styles from './table.module.css'
-import { useAuthorStore } from '../../../../../store/author.store'
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
 import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { MdDelete, MdEditSquare } from 'react-icons/md'
-import { deleteAuthor } from '../../../../../api/author'
+import {
+  deleteAuthor
+  // getAuthors
+} from '../../../../../api/author'
+import useFetchAuthors from '../../../../../hooks/author/useFetchAuthors'
 
 interface Sorting {
   column: string
@@ -127,21 +133,11 @@ const Content = ({ entries, columns }: { entries: ListOfAuthors, columns: string
 
 const Table: React.FC = () => {
   const columns = ['imgLink', 'name', 'actions']
+
   const [sorting, setSorting] = useState<Sorting>({ column: 'name', order: 'asc' })
   const [searchValue, setSearchValue] = useState<string>('')
-  const fetchAuthorsStore = useAuthorStore(state => state.fetchAuthorsStore)
-  const authors = useAuthorStore(state => state.authors)
 
-  useEffect(() => {
-    async function fetchAuthorsFromStore (): Promise<void> {
-      try {
-        await fetchAuthorsStore(sorting.column, sorting.order, searchValue)
-      } catch (error) {
-        console.error('Error fetching authors from store: ', error)
-      }
-    }
-    fetchAuthorsFromStore().catch(error => { console.error('Error fetching authors: ', error) })
-  }, [fetchAuthorsStore, authors])
+  const authors = useFetchAuthors(sorting.column, sorting.order, searchValue)
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)

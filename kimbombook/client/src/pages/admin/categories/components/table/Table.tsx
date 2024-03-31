@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
-import { useCategoryStore } from '../../../../../store/category.store'
+import { useState } from 'react'
 import { type Category, type ListOfCategories } from '../../../../../types'
 import './table.css'
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi'
 import { FaSearch } from 'react-icons/fa'
 import { MdEditSquare, MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { deleteCategory } from '../../../../../api/category'
+import useFetchCategories from '../../../../../hooks/categories/useFetchCategories'
 
 interface Sorting {
   column: string
@@ -50,14 +51,11 @@ const Header = ({ columns, sorting, sortTable }: { columns: string[], sorting: S
 }
 
 const Content = ({ entries, columns }: { entries: ListOfCategories, columns: string[] }): JSX.Element => {
-  const deleteCategoryStore = useCategoryStore(state => state.deleteCategoryStore)
-
   const handleDelete = async (categoryId: string): Promise<void> => {
     try {
       const confirmDelete = window.confirm('Are you sure you want to delete this category?')
       if (confirmDelete) {
-        // eslint-disable-next-line @typescript-eslint/await-thenable, @typescript-eslint/no-confusing-void-expression
-        await deleteCategoryStore(categoryId)
+        await deleteCategory(categoryId)
       } else {
         console.log('Delete cancelled')
       }
@@ -116,19 +114,7 @@ const Table: React.FC = () => {
   const [searchValue, setSearchValue] = useState('')
   const columns = ['name', 'description', 'actions']
 
-  const fetchCategoriesStore = useCategoryStore(state => state.fetchCategoriesStore)
-  const categories = useCategoryStore(state => state.categories)
-
-  useEffect(() => {
-    async function fetchCategoriesFromStore (): Promise<void> {
-      try {
-        await fetchCategoriesStore(sorting.column, sorting.order, searchValue)
-      } catch (error) {
-        console.error('Error fetching categories from store: ', error)
-      }
-    }
-    fetchCategoriesFromStore().catch(error => { console.error('Error fetching categories: ', error) })
-  }, [sorting, fetchCategoriesStore, categories, searchValue])
+  const categories = useFetchCategories(sorting.column, sorting.order, searchValue)
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)

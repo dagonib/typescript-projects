@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react'
 import './form.css'
-import { useBookStore } from '../../../../../store/booksStore'
 import { ELanguage } from '../../../../../enums'
 import { type Book } from '../../../../../types'
 import { useNavigate } from 'react-router-dom'
-import useFetchAuthorsFromStore from '../../../../../hooks/useFetchAuthorsFromStore'
+import useFetchAuthors from '../../../../../hooks/author/useFetchAuthors'
 import { SelectCategories, type SelectCategoryOption } from '../selectCategories/SelectCategories'
-import useFetchCategoriesFromStore from '../../../../../hooks/useFetchCategoriesFromStore'
+import useFetchCategories from '../../../../../hooks/categories/useFetchCategories'
+import { createBook, updateBook } from '../../../../../api/book'
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const navigate = useNavigate()
-  const createBookStore = useBookStore(state => state.createBookStore)
-  const updateBookStore = useBookStore(state => state.updateBookStore)
 
-  const listOfCategories = useFetchCategoriesFromStore()
-  const authors = useFetchAuthorsFromStore()
+  const authors = useFetchAuthors('name', 'asc', null)
+  const listOfCategories = useFetchCategories('name', 'asc', null)
 
   const [value, setValue] = useState<SelectCategoryOption[]>([])
   const [title, setTitle] = useState('')
@@ -47,14 +45,14 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
     e.preventDefault()
     try {
       if (book !== null && book !== undefined) {
-        await updateBookStore(book._id, title, author, description, imageLink, categories, language, link, available)
+        await updateBook(book._id, title, author, description, imageLink, categories, language, link, available)
         setShowConfirmation(true)
         setTimeout(() => {
           setShowConfirmation(false)
         }, 3000)
         navigate('/admin/books')
       } else {
-        await createBookStore(title, author, description, imageLink, categories, language, link, available)
+        await createBook(title, author, description, imageLink, categories, language, link, available)
         setTitle('')
         setAuthor('')
         setDescription('')
