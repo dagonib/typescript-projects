@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { type Category, type ListOfCategories } from '../../../../../types'
 import './table.css'
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi'
@@ -50,12 +50,13 @@ const Header = ({ columns, sorting, sortTable }: { columns: string[], sorting: S
   )
 }
 
-const Content = ({ entries, columns }: { entries: ListOfCategories, columns: string[] }): JSX.Element => {
+const Content = ({ entries, columns, onDelete }: { entries: ListOfCategories, columns: string[], onDelete: (categoryId: string) => void }): JSX.Element => {
   const handleDelete = async (categoryId: string): Promise<void> => {
     try {
       const confirmDelete = window.confirm('Are you sure you want to delete this category?')
       if (confirmDelete) {
         await deleteCategory(categoryId)
+        onDelete(categoryId)
       } else {
         console.log('Delete cancelled')
       }
@@ -113,8 +114,13 @@ const Table: React.FC = () => {
   const [sorting, setSorting] = useState({ column: 'name', order: 'asc' })
   const [searchValue, setSearchValue] = useState('')
   const columns = ['name', 'description', 'actions']
+  const [entries, setEntries] = useState<ListOfCategories>([])
 
   const categories = useFetchCategories(sorting.column, sorting.order, searchValue)
+
+  useEffect(() => {
+    setEntries(categories)
+  }, [categories])
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)
@@ -122,6 +128,10 @@ const Table: React.FC = () => {
 
   const searchTable = (newSearchValue: string): void => {
     setSearchValue(newSearchValue)
+  }
+
+  const handleDeleteCategory = (categoryId: string): void => {
+    setEntries(entries.filter((entry: Category) => entry._id !== categoryId))
   }
 
   return (
@@ -139,6 +149,7 @@ const Table: React.FC = () => {
         <Content
           entries={categories}
           columns={columns}
+          onDelete={handleDeleteCategory}
         />
       </table>
       <div>Pagination</div>

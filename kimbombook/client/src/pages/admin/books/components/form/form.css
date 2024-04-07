@@ -28,6 +28,10 @@
   flex-direction: column;
 }
 
+.form__input:nth-child(4) {
+  height: auto;
+}
+
 .form__select {
   height: auto;
   max-width: 100%;

@@ -3,11 +3,13 @@ import styles from './form.module.css'
 import { createAuthor, updateAuthor } from '../../../../../api/author'
 import { useNavigate } from 'react-router-dom'
 import { type Author } from '../../../../../types'
+import FileImageInput from '../../../components/fileImageInput/FileImageInput'
+import book_mockup from '../../../../../assets/book_mockup.png'
 
 const Form: React.FC<{ author?: Author }> = ({ author }) => {
   const navigate = useNavigate()
   const [name, setName] = useState('')
-  const [imageLink, setImageLink] = useState('')
+  const [imageLink, setImageLink] = useState(book_mockup)
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   useEffect(() => {
@@ -53,17 +55,15 @@ const Form: React.FC<{ author?: Author }> = ({ author }) => {
           />
         </div>
 
-        {/* ImageURL */}
+        {/* Image */}
         <div className={styles.form__item}>
-          <label htmlFor='author-imgUrl'>Image URL</label>
-          <input
-            id='author-img'
-            value={imageLink}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setImageLink(e.target.value)
-            }}
+          <label htmlFor='author-img'>Image</label>
+          <FileImageInput
+            fileImageUrl={imageLink}
+            setFileImageUrl={setImageLink}
+            type='authors'
           />
-        </div>
+          </div>
       </div>
 
       <button className='btn'>

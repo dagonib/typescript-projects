@@ -1,4 +1,5 @@
 import {
+  useEffect,
   // useEffect,
   useState
 } from 'react'
@@ -87,12 +88,13 @@ const SearchBar = ({ searchTable }: { searchTable: any }): JSX.Element => {
   )
 }
 
-const Content = ({ entries, columns }: { entries: ListOfAuthors, columns: string[] }): JSX.Element => {
-  const handleDelete = async (id: string): Promise<void> => {
+const Content = ({ entries, columns, onDelete }: { entries: ListOfAuthors, columns: string[], onDelete: (authorId: string) => void }): JSX.Element => {
+  const handleDelete = async (authorId: string): Promise<void> => {
     try {
       const confirmDelete = window.confirm('Are you sure you want to delete this author?')
       if (confirmDelete) {
-        await deleteAuthor(id)
+        await deleteAuthor(authorId)
+        onDelete(authorId)
       }
     } catch (error) {
       console.error('Error deleting author: ', error)
@@ -136,8 +138,13 @@ const Table: React.FC = () => {
 
   const [sorting, setSorting] = useState<Sorting>({ column: 'name', order: 'asc' })
   const [searchValue, setSearchValue] = useState<string>('')
+  const [entries, setEntries] = useState<ListOfAuthors>([])
 
   const authors = useFetchAuthors(sorting.column, sorting.order, searchValue)
+
+  useEffect(() => {
+    setEntries(authors)
+  }, [authors])
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)
@@ -145,6 +152,10 @@ const Table: React.FC = () => {
 
   const searchTable = (newSearchValue: string): void => {
     setSearchValue(newSearchValue)
+  }
+
+  const handleDeleteAuthor = (authorId: string): void => {
+    setEntries(entries.filter((entry: Author) => entry._id !== authorId))
   }
 
   return (
@@ -160,8 +171,9 @@ const Table: React.FC = () => {
           sortTable={sortTable}
         />
         <Content
-          entries={authors}
+          entries={entries}
           columns={columns}
+          onDelete={handleDeleteAuthor}
         />
       </table>
     </div>

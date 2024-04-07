@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './booksTable.css'
 import {
   type Book,
@@ -55,7 +55,7 @@ const Header = ({ columns, sorting, sortTable }: { columns: string[], sorting: S
   )
 }
 
-const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[] }): JSX.Element => {
+const Content = ({ entries, columns, onDelete }: { entries: ListOfBooks, columns: string[], onDelete: (bookId: string) => void }): JSX.Element => {
   const [showFullText, setShowFullText] = useState(false)
   const [popoverText, setPopoverText] = useState('')
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
@@ -80,6 +80,7 @@ const Content = ({ entries, columns }: { entries: ListOfBooks, columns: string[]
       const confirmed = window.confirm('Are you sure?')
       if (confirmed) {
         await deleteBook(bookId)
+        onDelete(bookId)
       } else {
         console.log('Delete cancelled by user')
       }
@@ -160,9 +161,13 @@ const BooksTable: React.FC = () => {
   const [sorting, setSorting] = useState({ column: 'title', order: 'asc' })
   const columns = ['imageLink', 'title', 'author', 'description', 'available', 'categories', 'link', 'actions']
   const [searchValue, setSearchValue] = useState('')
+  const [entries, setEntries] = useState<ListOfBooks>([])
 
   const books = useFetchBooks(sorting.column, sorting.order, searchValue)
-  console.log('Books:', books)
+
+  useEffect(() => {
+    setEntries(books)
+  }, [books])
 
   const sortTable = (newSorting: Sorting): void => {
     setSorting(newSorting)
@@ -170,6 +175,10 @@ const BooksTable: React.FC = () => {
 
   const searchTable = (newSearchValue: string): void => {
     setSearchValue(newSearchValue)
+  }
+
+  const handleDeleteBook = (bookId: string): void => {
+    setEntries(entries.filter((entry: Book) => entry._id !== bookId))
   }
 
   return (
@@ -186,8 +195,9 @@ const BooksTable: React.FC = () => {
           sortTable={sortTable}
         />
         <Content
-          entries={books}
+          entries={entries}
           columns={columns}
+          onDelete={handleDeleteBook}
         />
       </table>
       <div>Pagination</div>

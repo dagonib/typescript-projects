@@ -7,6 +7,8 @@ import useFetchAuthors from '../../../../../hooks/author/useFetchAuthors'
 import { SelectCategories, type SelectCategoryOption } from '../selectCategories/SelectCategories'
 import useFetchCategories from '../../../../../hooks/categories/useFetchCategories'
 import { createBook, updateBook } from '../../../../../api/book'
+import FileImageInput from '../../../components/fileImageInput/FileImageInput'
+import book_mockup from '../../../../../assets/book_mockup.png'
 
 const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const navigate = useNavigate()
@@ -18,7 +20,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [description, setDescription] = useState('')
-  const [imageLink, setImageLink] = useState('')
+  const [imageLink, setImageLink] = useState<string>(book_mockup)
   const [categories, setCategories] = useState<string[]>([])
   const [language, setLanguage] = useState<ELanguage>(ELanguage.Castellano)
   const [link, setLink] = useState('')
@@ -96,7 +98,7 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
 
           {/* Author */}
           <div className='form__input'>
-            <label htmlFor="book-author">Autores</label>
+            <label htmlFor="book-author">Autor</label>
             <select
               id="book-author"
               value={author}
@@ -125,15 +127,13 @@ const Form: React.FC<{ book?: Book }> = ({ book }) => {
             />
           </div>
 
-          {/* ImageLink */}
+          {/* Portada */}
           <div className='form__input'>
-            <label htmlFor="book-imageLink">Image Link</label>
-            <input
-              id="book-imageLink"
-              value={imageLink}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setImageLink(e.target.value)
-              }}
+           <label htmlFor="book-imageLink">Portada</label>
+            <FileImageInput
+              fileImageUrl={imageLink}
+              setFileImageUrl={setImageLink}
+              type='books'
             />
           </div>
         </div>

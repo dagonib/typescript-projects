@@ -1,0 +1,23 @@
+.fileImageInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fileImageInput__image {
+  width: 75px;
+  border: 1px solid #000;
+}
+
+.fileImageInput__message {
+  font-size: 12px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+} 
