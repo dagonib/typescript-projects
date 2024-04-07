@@ -1,9 +1,9 @@
-header {
+section {
   width: 100%;
   overflow: hidden;
 }
 
-.header-container {
+.recommended-books__container {
   max-width: 1880px !important;
   width: 90%;
   margin: 0 auto;
@@ -15,7 +15,7 @@ header {
   padding: 50px 0;
 }
 
-.header-wrapper {
+.recommended-books__wrapper {
   display: grid;
   grid-template-columns: auto 280px;
   align-items: center;
@@ -25,7 +25,7 @@ header {
   width: 90% !important;
 }
 
-.header-left {
+.recommended-books__left {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -33,7 +33,7 @@ header {
   margin-bottom: 75px;
 }
 
-.header-left h5 {
+.recommended-books__left h5 {
   color: var(--color-primary);
 }
 
@@ -75,47 +75,47 @@ header {
 }
 
 @media (max-width: 1256px) {
-  .header-wrapper {
+  .recommended-books__wrapper {
     gap: 60px;
   }
 }
 
 @media (max-width: 1190px) {
-  .header-wrapper {
+  .recommended-books__wrapper {
     gap: 20px;
   }
 }
 
 @media (max-width: 1080px) {
-  .header-wrapper {
+  .recommended-books__wrapper {
     grid-template-columns: auto 340px;
   }
 }
 
 @media (max-width: 1000px) {
-  .header-container {
+  .recommended-books__container {
     width: 97% !important;
     padding: 100px 0;
   }
 
-  .header-wrapper {
+  .recommended-books__wrapper {
     width: 92% !important;
     grid-template-columns: 1fr;
     row-gap: 1rem;
     text-align: center;
   }
 
-  .header-right {
+  .recommended-books__right {
     grid-row: 1;
     margin: 0 auto;
     width: 35%;
   }
 
-  .header-left p {
+  .recommended-books__left p {
     margin-top: 10px;
   }
 
-  .header-left .btn {
+  .recommended-books__left .btn {
     margin: auto;
   }
 
@@ -125,7 +125,7 @@ header {
 }
 
 @media (max-width: 600px) {
-  .header-right {
+  .ecommended-books__right {
     width: 50%;
   }
 

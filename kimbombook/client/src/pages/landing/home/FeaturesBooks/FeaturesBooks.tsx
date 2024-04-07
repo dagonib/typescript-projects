@@ -10,28 +10,10 @@ import { Pagination } from 'swiper/modules'
 
 import { BsArrowReturnRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import useFetchBooks from '../../../../hooks/books/useFetchBooks'
-import { type ListOfBooks } from '../../../../types'
-import { useEffect, useState } from 'react'
-import useGetAuthorsNames from '../../../../hooks/author/useGetAuthorsNames'
+import useGetRandomBooks from '../../../../hooks/books/useGetRandomBooks'
 
 const FeaturesBooks: React.FC = () => {
-  const books = useFetchBooks('title', 'desc', null)
-  const [randomBooks, setRandomBooks] = useState<ListOfBooks>([])
-  const authorNames = useGetAuthorsNames(randomBooks)
-
-  useEffect(() => {
-    if (books.length > 0) {
-      const selectedBooks: ListOfBooks = []
-      while (selectedBooks.length <= 11) {
-        const randomIndex = Math.floor(Math.random() * books.length)
-        if (!selectedBooks.includes(books[randomIndex])) {
-          selectedBooks.push(books[randomIndex])
-        }
-      }
-      setRandomBooks(selectedBooks)
-    }
-  }, [books])
+  const { randomBooks, authorNames } = useGetRandomBooks()
 
   return (
     <section className='featurers'>
