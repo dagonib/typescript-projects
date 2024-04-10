@@ -76,7 +76,7 @@ const FeaturesBooks: React.FC = () => {
           </Swiper>
       </div>
       <Link to='/libraria' className='btn btn-border feature-btn'>
-        Ver catálogo <BsArrowReturnRight />
+        Ver catálogo1 <BsArrowReturnRight />
       </Link>
     </section>
   )

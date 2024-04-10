@@ -1,0 +1,73 @@
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0.5rem 1rem 1.5rem 1rem;
+}
+
+/* Logo & Menu */
+.pageHeader__logo {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Search Form */
+.pageHeader__searchForm {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  max-width: 400px;
+}
+
+.pageHeader__searchForm div {
+  display: flex;
+  flex-grow: 1;
+}
+
+.pageHeader__searchForm input {
+  border-radius: 40px 0 0 40px;
+  border: 1px solid #c3c3c3;
+  border-right: 0;
+  padding: 8px 8px 8px 20px;
+  width: 100%;
+}
+
+.pageHeader__searchForm input:focus {
+  outline: none;
+  border: 1px solid #75afe5;
+}
+
+/* Small Search Form */
+.pageHeader__smallSearchForm {
+  display: none;
+}
+
+/* Pantallas inferiores a 576px */
+@media screen and (max-width: 576px) {
+  .pageHeader__small {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .pageHeader__smallSearchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Estilos Commons */
+  .hidden {
+    display: none;
+  }
+  .flex {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+

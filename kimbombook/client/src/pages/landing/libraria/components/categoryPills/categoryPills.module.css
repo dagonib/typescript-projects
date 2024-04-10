@@ -1,0 +1,23 @@
+.categoryPills {
+  overflow: hidden;
+  position: relative;
+}
+
+.categoryPills__content {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  width: max-content;
+  background-color: rgb(243, 242, 236);
+}
+
+.categories__sideButtons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);    
+  background-image: linear-gradient(to right, rgba(243, 242, 236, 1) 50%, rgba(243, 242, 236, 0));
+  width: 6rem;
+}
