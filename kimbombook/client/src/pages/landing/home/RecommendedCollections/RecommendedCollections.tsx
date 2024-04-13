@@ -33,7 +33,7 @@ const RecommendedCollections: React.FC = () => {
         {/* Filter Books Content */}
         <div className="recommended-collections__gallery">
           {
-            filteredBooks.map(({ title, author, imageLink }, _id) => {
+            filteredBooks.slice(0, 4).map(({ title, author, imageLink }, _id) => {
               return (
                 <div className="recommended-collections__gallery-item" key={_id}>
                   <div className="recommended-collections__gallery-item__image">

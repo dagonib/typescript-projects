@@ -46,6 +46,13 @@ export function CategoryPills ({ categories, selectedCategory, onSelect }: Categ
         className={styles.categoryPills__content}
         style={{ transform: `translateX(-${translate}px)` }}
       >
+        <Button
+            key={'all'}
+            variant={selectedCategory === 'all' ? 'dark' : 'category'}
+            onClick={() => { onSelect('all') }}
+          >
+            All
+        </Button>
         {categories.map((category) => (
           <Button
             key={category._id}

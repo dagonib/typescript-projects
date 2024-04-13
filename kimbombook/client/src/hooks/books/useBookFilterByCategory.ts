@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { type ListOfBooks } from '../../types'
-import { getBooksByCategory } from '../../api/book'
+import { getBooks, getBooksByCategory } from '../../api/book'
 
 const useBookFilterByCategory = (initialCategory: string): { filteredBooks: ListOfBooks, idCategory: string, setIdCategory: React.Dispatch<React.SetStateAction<string>> } => {
   const [filteredBooks, setFilteredBooks] = useState<ListOfBooks>([])
@@ -9,7 +9,12 @@ const useBookFilterByCategory = (initialCategory: string): { filteredBooks: List
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const data = (await getBooksByCategory(idCategory)).slice(0, 4)
+        let data: ListOfBooks = []
+        if (idCategory === 'all') {
+          data = await getBooks()
+        } else {
+          data = (await getBooksByCategory(idCategory))
+        }
         setFilteredBooks(data)
       } catch (error) {
         console.error('Error fetching books from store: ', error)

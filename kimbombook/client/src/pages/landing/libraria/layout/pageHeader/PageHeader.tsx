@@ -5,24 +5,14 @@ import { TfiMenu } from 'react-icons/tfi'
 import { BiSearch } from 'react-icons/bi'
 import { useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
+import { useSidebarContext } from '../../../../../contexts/SidebarContext'
 
 const PageHeader: React.FC = () => {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState<boolean>(false)
-  console.log('showFullWidthSearch', showFullWidthSearch)
 
   return (
     <div className={`pageHeader ${showFullWidthSearch ? 'pageHeader__small' : ''}` }>
-      {!showFullWidthSearch && (
-        <div className='pageHeader__logo'>
-          <Button
-            variant="menu"
-          >
-            <TfiMenu />
-          </Button>
-         <Link to="/">kimbombook</Link>
-        </div>
-      )}
-
+      <PageHeaderFirstSection hidden={showFullWidthSearch} />
       <form className={`pageHeader__searchForm ${showFullWidthSearch ? 'flex' : 'hidden'}`}>
 
         {showFullWidthSearch && (
@@ -53,6 +43,31 @@ const PageHeader: React.FC = () => {
         </div>
       )}
     </div>
+  )
+}
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type PageHeaderFirstSectionProps = {
+  hidden?: boolean
+}
+
+export function PageHeaderFirstSection ({ hidden = false }: PageHeaderFirstSectionProps): JSX.Element {
+  const { toggle } = useSidebarContext()
+
+  return (
+    <>
+      {!hidden && (
+        <div className='pageHeader__logo'>
+          <Button
+            onClick={toggle}
+            variant="menu"
+          >
+            <TfiMenu />
+          </Button>
+          <Link to="/">kimbombook</Link>
+        </div>
+      )}
+    </>
   )
 }
 
