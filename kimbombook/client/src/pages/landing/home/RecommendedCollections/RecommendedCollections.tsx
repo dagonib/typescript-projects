@@ -1,18 +1,22 @@
 import './recommendedCollections.css'
 import TitleTypeOne from '../../UI/TitleTypeOne/TitleTypeOne'
-import { Link } from 'react-router-dom'
 import { BsArrowReturnRight } from 'react-icons/bs'
 import useBookFilterByCategory from '../../../../hooks/books/useBookFilterByCategory'
 import useGetAuthorsNames from '../../../../hooks/author/useGetAuthorsNames'
+import MainButton from '../../UI/mainButton/MainButton'
 
 const RecommendedCollections: React.FC = () => {
   const { filteredBooks, idCategory, setIdCategory } = useBookFilterByCategory('6606d5ae23ffd43602854313')
   const authorsName = useGetAuthorsNames(filteredBooks)
 
   return (
-    <section className='recommended-collections'>
-      <div className='container recommended-collections__container'>
-        <TitleTypeOne titleTop={'Some quality items'} title={'Colecciones Recomendadas'} className={'recommended-collections__title'} />
+    <section>
+      <div className='container'>
+        <TitleTypeOne
+          titleTop={'Narrativas enmarcadas en su época'}
+          title={'Colecciones Recomendadas'}
+          className={'recommended-collections__title'}
+        />
 
         {/* Filter Tabs Buttons */}
         <div className="recommended-collections__filter-buttons">
@@ -41,7 +45,7 @@ const RecommendedCollections: React.FC = () => {
                   </div>
                   <div className="recommended-collections__gallery-item__info">
                     <h4>{title}</h4>
-                    <div><small>{authorsName[author]}</small></div>
+                    <h5>{authorsName[author]}</h5>
                   </div>
                 </div>
               )
@@ -49,9 +53,11 @@ const RecommendedCollections: React.FC = () => {
           }
         </div>
 
-      <Link to='/libraria' className='btn btn-border feature-btn'>
-        Ver catálogo <BsArrowReturnRight />
-      </Link>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <MainButton link='/libraria'>
+            Ver catálogo <BsArrowReturnRight />
+          </MainButton>
+        </div>
       </div>
     </section>
   )

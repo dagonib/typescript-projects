@@ -2,7 +2,7 @@ import './titleTypeOne.css'
 import victor from '../../../../assets/victor.png'
 
 interface props {
-  className: string
+  className?: string
   titleTop: string
   title: string
 }
@@ -13,10 +13,10 @@ const TitleTypeOne: React.FC<props> = ({ className, title, titleTop }) => {
       <small>{titleTop}</small>
       <div className="heading-H">
         <div className="line"></div>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
         <div className="line"></div>
       </div>
-      <img src={victor} alt="" className='victor' />
+      <img src={victor} alt="" className='image' />
     </div>
   )
 }

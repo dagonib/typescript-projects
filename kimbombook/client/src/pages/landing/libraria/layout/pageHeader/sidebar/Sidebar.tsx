@@ -4,12 +4,17 @@ import { Children, type ReactNode, useState } from 'react'
 import { useSidebarContext } from '../../../../../../contexts/SidebarContext'
 import { PageHeaderFirstSection } from '../PageHeader'
 import useFetchCategories from '../../../../../../hooks/categories/useFetchCategories'
-import useFetchAuthors from '../../../../../../hooks/author/useFetchAuthors'
+// import useFetchAuthors from '../../../../../../hooks/author/useFetchAuthors'
 
-export function Sidebar (): JSX.Element {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type SidebarProps = {
+  onSelect: (categoryId: string) => void
+}
+
+export function Sidebar ({ onSelect }: SidebarProps): JSX.Element {
   const { isOpen, close } = useSidebarContext()
   const categories = useFetchCategories('name', 'asc', null)
-  const authors = useFetchAuthors('name', 'asc', null)
+  // const authors = useFetchAuthors('name', 'asc', null)
 
   return (
     <>
@@ -22,18 +27,20 @@ export function Sidebar (): JSX.Element {
         </div>
         <SidebarSection
           title='Categorías'
-          visibleItemCount={4}
+          visibleItemCount={6}
         >
+          <hr/>
           {categories.map(category => (
             <SidebarItem
               key={category._id}
               title={category.name}
-              url='/'
+              id={category._id}
+              onSelect={onSelect}
             />
           ))}
         </SidebarSection>
-        <hr/>
-        <SidebarSection
+        {/* <hr/> */}
+        {/* <SidebarSection
           title='Autores'
           visibleItemCount={4}
         >
@@ -44,7 +51,7 @@ export function Sidebar (): JSX.Element {
               url='/'
             />
           ))}
-        </SidebarSection>
+        </SidebarSection> */}
       </aside>
       {isOpen && (
         <div
@@ -92,12 +99,10 @@ function SidebarSection ({
   const ButtonIcon = isExpanded ? BiChevronUp : BiChevronDown
 
   return (
-    <div>
+    <div className={styles.sidebarSection}>
       {(title != null) &&
-        <div
-          className={styles.sidebarSectionTitle}
-        >
-          {title}
+        <div>
+          <h5 className={styles.sidebarSectionTitle}>{title}</h5>
         </div>}
       {visibleChildren}
       {showExpandButton && (
@@ -121,13 +126,14 @@ function SidebarSection ({
 type SidebarItemProps = {
   isActive?: boolean
   title: string
-  url: string
+  id: string
+  onSelect: (categoryId: string) => void
 }
 
-function SidebarItem ({ isActive = false, title, url }: SidebarItemProps): JSX.Element {
+function SidebarItem ({ isActive = false, title, id, onSelect }: SidebarItemProps): JSX.Element {
   return (
     <a
-      href={url}
+      onClick={() => { onSelect(id) }}
       {...(isActive
         ? { className: styles.activeSidebarItem }
         : { className: styles.sidebarItem })

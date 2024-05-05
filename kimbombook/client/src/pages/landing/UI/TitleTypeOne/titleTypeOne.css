@@ -1,7 +1,6 @@
 .titleTypeOne {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   text-align: center;
 }
 
@@ -17,7 +16,7 @@
   height: 1px;
 }
 
-.victor {
+.image {
   width: 46px;
   margin: 0 auto;
 }

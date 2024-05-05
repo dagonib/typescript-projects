@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import './recommendedBooks.css'
 
 // Import Swiper React Components
@@ -11,13 +10,15 @@ import { Navigation, Pagination } from 'swiper/modules'
 // React Arrow Icons
 import { GoArrowRight, GoArrowLeft } from 'react-icons/go'
 import useGetRandomBooks from '../../../../hooks/books/useGetRandomBooks'
+import MainButton from '../../UI/mainButton/MainButton'
+import BuyButton from '../../UI/buyButton/BuyButton'
 
 const RecommendedBooks: React.FC = () => {
   const { randomBooks, authorNames } = useGetRandomBooks()
 
   return (
     <section>
-        <div className="container recommended-books__container">
+        <div className="recommended-books__container container">
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
@@ -41,13 +42,16 @@ const RecommendedBooks: React.FC = () => {
               }, _id) => {
                 return (
                   <SwiperSlide key={_id}>
-                    <div className='recommended-books__wrapper container'>
+                    <div className='recommended-books__wrapper'>
                       {/* Header Left */}
                       <div className="recommended-books__left">
                         <h1>{title}</h1>
-                        <h5>{authorNames[author]}</h5>
+                        <h3>{authorNames[author]}</h3>
                         <p dangerouslySetInnerHTML={ { __html: description } }></p>
-                        <Link className='btn btn-border' to={link}>Comprar</Link>
+                        <div>
+                          <MainButton link={link}>Comprar</MainButton>
+                          <BuyButton />
+                        </div>
                       </div>
 
                       {/* HeaderRight */}

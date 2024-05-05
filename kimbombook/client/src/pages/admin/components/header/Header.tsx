@@ -1,5 +1,4 @@
 import Logo from '../logo/Logo'
-import Nav from '../nav/Nav'
 import './header.css'
 
 const Header: React.FC = () => {
@@ -7,10 +6,6 @@ const Header: React.FC = () => {
     <div className="admin-header" id='admin-header'>
       {/* Logo */}
       <Logo />
-
-      {/* Navbar */}
-      <Nav />
-
     </div>
   )
 }

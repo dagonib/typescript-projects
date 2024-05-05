@@ -1,0 +1,10 @@
+.titleTypeTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  width: 46px;
+  margin: 0 auto;
+}

@@ -5,6 +5,7 @@ import { TfiMenu } from 'react-icons/tfi'
 import { BiSearch } from 'react-icons/bi'
 import { useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
+import logo from '../../../../../assets/logo.png'
 import { useSidebarContext } from '../../../../../contexts/SidebarContext'
 
 const PageHeader: React.FC = () => {
@@ -64,7 +65,10 @@ export function PageHeaderFirstSection ({ hidden = false }: PageHeaderFirstSecti
           >
             <TfiMenu />
           </Button>
-          <Link to="/">kimbombook</Link>
+          <Link to="/" className='nav-logo'>
+            <img src={logo} alt='logo' />
+            <p>Kimbombook</p>
+          </Link>
         </div>
       )}
     </>

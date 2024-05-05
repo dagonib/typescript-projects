@@ -36,8 +36,8 @@ const lettestArticleData = [
 
 const LatestArticles: React.FC = () => {
   return (
-    <section className='latest-articles'>
-      <div className="container latest-articles__container">
+    <section>
+      <div className="container">
         <TitleTypeOne title={'Últimos Artículos'} titleTop={'Lee nuestros artículos'} className='' />
 
         <div className="latest-articles__content">

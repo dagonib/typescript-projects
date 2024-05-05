@@ -35,13 +35,26 @@
   opacity: 0.5;
 }
 
+.sidebarSectionTitle {
+  color: #7a7a7a;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 2px;
+  text-align: left;
+}
+
 .sidebarItem {
   width: 100%;
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
   gap: 5px;
-  padding: 10px 5px;
+  padding: 5px 5px;
+}
+
+.sidebarItem:hover {
+  color: var(--color-primary);
+  cursor: pointer;
 }
 
 .activeSidebarItem {

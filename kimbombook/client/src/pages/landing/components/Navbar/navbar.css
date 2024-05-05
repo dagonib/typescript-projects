@@ -12,6 +12,24 @@
   justify-content: space-between;
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.nav-logo img {
+  width: 40px;
+  object-fit: cover;
+}
+
+.nav-logo p {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-secondary);
+}
+
 .nav-link {
   color: var(--color-dark);
   font-size: 16px;

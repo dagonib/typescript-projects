@@ -1,9 +1,10 @@
 // import Header from './Header/Header'
+import RecommendedBooks from './recommendedBooks/RecommendedBooks'
 import FeaturesBooks from './FeaturesBooks/FeaturesBooks'
 import RecommendedCollections from './RecommendedCollections/RecommendedCollections'
 import Quote from './Quote/Quote'
 import LatestArticles from '../components/LatestArticles/LatestArticles'
-import RecommendedBooks from './recommendedBooks/RecommendedBooks'
+import RecommendedAuthors from './recommendedAuthors/RecommendedAuthors'
 
 const HomePage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage: React.FC = () => {
         <FeaturesBooks />
         <RecommendedCollections />
         <Quote />
+        <RecommendedAuthors />
         <LatestArticles />
       </>
   )

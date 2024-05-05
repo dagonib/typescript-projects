@@ -1,0 +1,49 @@
+.btn {
+  font-family: var(--font-family-jakarta);
+  font-size: 16px;
+  color: var(--color-secondary);
+  background-color: var(--color-main);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: inline-block;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 20px 35px;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background: var(--color-black-Ex);
+  color: var(--color-bg-1);
+}
+
+.btn svg {
+  margin-left: 5px;
+}
+
+.buyButton {
+  font-family: var(--font-family-jakarta);
+  font-size: 14px;
+  color: var(--color-secondary);
+  background-color: var(--color-main);
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  padding: 5px 10px;
+}
+
+.modal {
+  background-color: rebeccapurple;
+  display: flex;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0;
+}
+
+.btns {
+  color: rebeccapurple;
+}

@@ -9,16 +9,17 @@ import 'swiper/css/pagination'
 import { Pagination } from 'swiper/modules'
 
 import { BsArrowReturnRight } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import useGetRandomBooks from '../../../../hooks/books/useGetRandomBooks'
+import MainButton from '../../UI/mainButton/MainButton'
 
 const FeaturesBooks: React.FC = () => {
   const { randomBooks, authorNames } = useGetRandomBooks()
 
   return (
-    <section className='featurers'>
-      <div className="container featurers-book-container">
-        <TitleTypeOne className='clas' title='Libros Recomendados' titleTop={'Libros Recomendados'}/>
+    <section>
+      <div className="container">
+        <TitleTypeOne title='Libros Recomendados' titleTop={'Historias que dejan huella'}/>
         <Swiper
             spaceBetween={50}
             slidesPerView={4}
@@ -63,21 +64,22 @@ const FeaturesBooks: React.FC = () => {
                       </div>
                       <div className='featurebook-info'>
                          <h4>{title}</h4>
-                         <div><h5><span>{authorNames[author]}</span></h5></div>
-                         {/* <span><small>{category}</small></span> */}
+                         <h5>{authorNames[author]}</h5>
                       </div>
+                         {/* <span><small>{category}</small></span> */}
                     </div>
                   </SwiperSlide>
                 )
               })
             }
-            <div className="feature-border container" />
+            <div/>
             <div className="swiper-pagination"></div>
-          </Swiper>
+        </Swiper>
+
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <MainButton link='/libraria'>Ver Catálogo<BsArrowReturnRight /></MainButton>
+        </div>
       </div>
-      <Link to='/libraria' className='btn btn-border feature-btn'>
-        Ver catálogo1 <BsArrowReturnRight />
-      </Link>
     </section>
   )
 }

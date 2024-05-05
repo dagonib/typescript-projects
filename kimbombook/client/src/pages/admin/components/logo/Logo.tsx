@@ -9,7 +9,7 @@ const Logo: React.FC = () => {
   return (
     <div className="admin-logo" id='admin-logo'>
       <a className=''>
-        <span>AdminDashboard</span>
+        <span>Admin</span>
       </a>
       <FaThList
         className='admin-logo__icon'

@@ -7,8 +7,6 @@ type SidebarProviderProps = {
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type SidebarContextType = {
-  // isLargeOpen: boolean
-  // isSmallOpen: boolean
   isOpen: boolean
   toggle: () => void
   close: () => void

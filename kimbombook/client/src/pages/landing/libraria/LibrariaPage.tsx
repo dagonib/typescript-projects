@@ -11,6 +11,7 @@ import useGetCategoriesNames from '../../../hooks/categories/useGetCategoriesNam
 import { Sidebar } from './layout/pageHeader/sidebar/Sidebar'
 import { SidebarProvider } from '../../../contexts/SidebarContext'
 import useBookFilterByCategory from '../../../hooks/books/useBookFilterByCategory'
+// import useGetCathegoryById from '../../../hooks/categories/useGetCathegoryById'
 
 const LibrariaPage: React.FC = () => {
   const books = useFetchBooks('title', 'asc', null)
@@ -19,6 +20,7 @@ const LibrariaPage: React.FC = () => {
   const categories = useFetchCategories('name', 'asc', null)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const { filteredBooks, setIdCategory } = useBookFilterByCategory('all')
+  // const category = useGetCathegoryById(selectedCategory)
 
   useEffect(() => {
     if (categories.length > 0) {
@@ -36,7 +38,7 @@ const LibrariaPage: React.FC = () => {
       <div className={styles.libraria}>
         <PageHeader />
         <div className={styles.libraria__container}>
-          <Sidebar />
+          <Sidebar onSelect={handleCategoryChange}/>
           <div className={styles.libraria__categories_wrap}>
             <div className={styles.libraria__categories}>
               <CategoryPills
@@ -45,6 +47,7 @@ const LibrariaPage: React.FC = () => {
                 onSelect={handleCategoryChange}
               />
             </div>
+            {/* <p>{category?.description}</p> */}
             <div className={styles.libraria__booksContainer}>
               {filteredBooks.map((book: Book) => (
                 <BookGridItem

@@ -8,6 +8,9 @@ const useGetCathegoryById = (cathegoryId: string | undefined): Category | undefi
   useEffect(() => {
     async function fetchCategory (): Promise<void> {
       try {
+        if (cathegoryId === 'all') {
+          return
+        }
         if (cathegoryId !== undefined && cathegoryId.length > 0) {
           const data = await getCategoryById(cathegoryId)
           setCategory(data)

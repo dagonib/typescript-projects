@@ -1,14 +1,4 @@
-.quote {
-  background: var(--color-bg-2);
-}
-
-.quote-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.quote-container article {
+article {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,26 +6,34 @@
 
 }
 
-.quote-container article p { 
+article p { 
   font-size: 26px;
   width: 60%;
   margin: 56px auto 20px auto;
   text-align: center;
 }
 
+article h5 {
+  font-family: var(--font-family-prata);
+  font-size: 22px;
+  color: var(--color-black);
+  text-transform: capitalize;
+  text-align: center;
+}
+
 @media (max-width: 1024px) {
-  .quote-container article p {
+  article p {
     width: 80%;
     font-size: 22px;
   }
 
-  .quote-container h5 {
+  h5 {
     font-size: 18px !important;
   }
 }
 
 @media (max-width: 600px) {
-  .quote-container article p {
+  article p {
     width: 100%;
     font-size: 18px;
   }

@@ -3,14 +3,13 @@ import victor from '../../../../assets/victor.png'
 
 interface props {
   title: string
-  className: string
 }
 
-const TitleTypeTwo: React.FC<props> = ({ title, className }) => {
+const TitleTypeTwo: React.FC<props> = ({ title }) => {
   return (
-    <div className={`titleTypeTwo ${className}`}>
-      <h2>{title}</h2>
-      <img src={victor} alt="" className='victor' />
+    <div className='titleTypeTwo'>
+      <h1>{title}</h1>
+      <img src={victor} alt="" className='image' />
     </div>
   )
 }

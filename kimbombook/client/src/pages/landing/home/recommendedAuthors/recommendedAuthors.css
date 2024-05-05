@@ -1,0 +1,11 @@
+.recommendedAuthors__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.recommendedAuthors__card--image {
+  width: 150px;
+  border-radius: 50%;
+}
